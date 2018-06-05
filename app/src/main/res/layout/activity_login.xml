@@ -6,11 +6,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- <ImageView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/balance_scale"
-            android:scaleType="centerCrop"/> -->
+            android:src="@drawable/balancescale"
+            android:scaleType="centerCrop"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,8 +30,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:src="@drawable/logo_tulisan"
-                android:scaleType="centerCrop"/>
+                android:src="@drawable/logotulisan"
+                android:scaleType="fitCenter"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

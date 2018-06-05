@@ -5,4 +5,13 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorShadow2">#2E000000</color>
     <color name="colorWhite">#ffff</color>
+    <color name="grayLight">#f1f1f1</color>
+
+    <color name="colorPrimaryRed">#E8641A</color>
+    <color name="colorPrimaryRedDark">#E8641A</color>
+
+
+    <color name="gold">#f4a10e</color>
+    <color name="blue">#2984ea</color>
+    <color name="colorSplashscrean">#E8641A</color>
 </resources>

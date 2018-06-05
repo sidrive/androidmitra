@@ -6,10 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,9 +29,6 @@
                 android:textSize="12pt"
                 android:textStyle="bold"
                 android:layout_gravity="center"/>
-        </LinearLayout>
-
-
 
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
@@ -44,50 +38,92 @@
 
                 <android.support.design.widget.TabLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/tabtest">
-
-                    <android.support.design.widget.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="HISTORY"
-                        android:id="@+id/tabHistory"/>
-
-                    <android.support.design.widget.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PERKARA BERJALAN"
-                        android:id="@+id/tabPerkara"/>
 
 
                 </android.support.design.widget.TabLayout>
+
             </android.support.design.widget.AppBarLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPager"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:orientation="vertical"
+                android:background="#ffff"
+                android:id="@+id/lndata">
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            </android.support.v7.widget.RecyclerView>
-            <FrameLayout
-                android:id="@+id/frameFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/primary"
+        android:id="@+id/lnbutton">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="5dp"
+            android:gravity="center"
+            android:id="@+id/lnProfile">
+
+            <ImageView
+                android:id="@+id/ivTendaDoom"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_account_circle_orange"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PROFILE"
+                android:textStyle="bold"/>
 
         </LinearLayout>
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="test"
-    android:id="@+id/btntest"/>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="5dp"
+            android:gravity="center"
+            android:id="@+id/lnPesan">
+            <ImageView
+                android:id="@+id/ivAcc"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_message"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PESAN"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

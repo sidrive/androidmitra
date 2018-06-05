@@ -1,6 +1,7 @@
 package lawyerku.android_mitra;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.design.widget.TabItem;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import butterknife.OnClick;
 import lawyerku.android_mitra.mainfragment.HistoryFragment;
 import lawyerku.android_mitra.mainfragment.PerkaraNewFragment;
 import lawyerku.android_mitra.mainfragment.ViewPagerAdapter;
+import lawyerku.android_mitra.ui.DetailProfileActivity;
+import lawyerku.android_mitra.ui.MessageActivity;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -33,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @BindView(R.id.viewPager)
     ViewPager viewPager1;
+
+
 
     ViewPagerAdapter viewPagerAdapter;
 
@@ -46,10 +52,22 @@ public class MainActivity extends AppCompatActivity implements
         viewPager1.setAdapter(viewPagerAdapter);
         tabHistory.setupWithViewPager(viewPager1);
 
+        Log.e("aa", "onCreate: " );
 
     }
 
 
+    @OnClick(R.id.lnProfile)
+    public void showProfile(){
+        Intent i = new Intent(MainActivity.this, DetailProfileActivity.class);
+        startActivity(i);
+    }
+
+    @OnClick(R.id.lnPesan)
+    public void showPesan(){
+        Intent i = new Intent(MainActivity.this, MessageActivity.class);
+        startActivity(i);
+    }
 
 
 

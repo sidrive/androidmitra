@@ -14,4 +14,6 @@
     <color name="gold">#f4a10e</color>
     <color name="blue">#2984ea</color>
     <color name="colorSplashscrean">#E8641A</color>
+
+    <color name="primary">#bf9b30</color>
 </resources>

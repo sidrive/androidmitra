@@ -16,4 +16,5 @@
     <color name="colorSplashscrean">#E8641A</color>
 
     <color name="primary">#bf9b30</color>
+    <color name="colorShadowWhite">#5Effffff</color>
 </resources>

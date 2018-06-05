@@ -109,6 +109,7 @@
             android:layout_marginTop="20dp"
             android:text="SIGN UP NOW"
             android:textColor="#f95402"
+            android:id="@+id/btnSingup"
             android:background="@drawable/bg_radius_transparant_white"/>
     </LinearLayout>
 

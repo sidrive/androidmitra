@@ -6,11 +6,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <!-- <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/balance_scale"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"/> -->
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -69,7 +69,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Forgot your password ?"
-                    android:textColor="#BF9B30"/>
+                    android:textColor="#BF9B30"
+                    android:id="@+id/txtForgotPassword"/>
 
             </LinearLayout>
 
@@ -88,6 +89,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="SIGN IN"
+                android:id="@+id/btnLogin"
                 android:background="@drawable/bg_radius_transparant_white"/>
 
             <TextView
@@ -101,7 +103,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="REGISTER"
-                android:textColor="#BF9B30"/>
+                android:textColor="#BF9B30"
+                android:id="@+id/txtRegister"/>
         </LinearLayout>
 
     </LinearLayout>

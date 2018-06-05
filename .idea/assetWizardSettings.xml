@@ -35,10 +35,10 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="bf9b30" />
-                                      <entry key="backgroundLayerName" value="ic_launcher_background" />
+                                      <entry key="backgroundLayerName" value="ic_launcher_background_logo" />
                                       <entry key="foregroundImage" value="$USER_HOME$/Downloads/Telegram Desktop/Lawyerku/Logo.png" />
-                                      <entry key="foregroundLayerName" value="ic_launcher_foreground" />
-                                      <entry key="outputName" value="ic_logo_lawyer" />
+                                      <entry key="foregroundLayerName" value="ic_launcher_logo" />
+                                      <entry key="outputName" value="ic_logo" />
                                     </map>
                                   </option>
                                 </PersistentState>

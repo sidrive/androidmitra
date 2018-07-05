@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="res_24dp">24dp</dimen>
+  <dimen name="res_32dp">32dp</dimen>
+  <dimen name="res_9dp">9dp</dimen>
+  <dimen name="res_18dp">18dp</dimen>
+  <dimen name="ts_24sp">24sp</dimen>
 </resources>

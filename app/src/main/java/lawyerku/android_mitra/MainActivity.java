@@ -29,58 +29,55 @@ import lawyerku.android_mitra.ui.MessageActivity;
 
 
 public class MainActivity extends AppCompatActivity implements
-        PerkaraNewFragment.OnFragmentInteractionListener,
-        HistoryFragment.OnFragmentInteractionListener{
+    PerkaraNewFragment.OnFragmentInteractionListener,
+    HistoryFragment.OnFragmentInteractionListener {
 
-    @BindView(R.id.tabtest)
-    TabLayout tabHistory;
+  @BindView(R.id.tabtest)
+  TabLayout tabHistory;
 
-    @BindView(R.id.viewPager)
-    ViewPager viewPager1;
-
-
-
-    ViewPagerAdapter viewPagerAdapter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager1.setAdapter(viewPagerAdapter);
-        tabHistory.setupWithViewPager(viewPager1);
-
-        Log.e("aa", "onCreate: " );
-
-    }
+  @BindView(R.id.viewPager)
+  ViewPager viewPager1;
 
 
-    @OnClick(R.id.lnProfile)
-    public void showProfile(){
-        Intent i = new Intent(MainActivity.this, DetailProfileActivity.class);
-        startActivity(i);
-    }
+  ViewPagerAdapter viewPagerAdapter;
 
-    @OnClick(R.id.lnPesan)
-    public void showPesan(){
-        Intent i = new Intent(MainActivity.this, MessageActivity.class);
-        startActivity(i);
-    }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ButterKnife.bind(this);
+
+    viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+    viewPager1.setAdapter(viewPagerAdapter);
+    tabHistory.setupWithViewPager(viewPager1);
+
+    Log.e("aa", "onCreate: ");
+
+  }
 
 
+  @OnClick(R.id.lnProfile)
+  public void showProfile() {
+    Intent i = new Intent(MainActivity.this, DetailProfileActivity.class);
+    startActivity(i);
+  }
+
+  @OnClick(R.id.lnPesan)
+  public void showPesan() {
+    Intent i = new Intent(MainActivity.this, MessageActivity.class);
+    startActivity(i);
+  }
 
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
+  @Override
+  public void onFragmentInteraction(Uri uri) {
 
-    }
+  }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
+  @Override
+  public void onPointerCaptureChanged(boolean hasCapture) {
 
-    }
+  }
 
 
 }

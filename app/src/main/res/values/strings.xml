@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Lawyerku-android-mitra</string>
-
+    <string name="desc_forgot">We just need your registered email address to send your password reset</string>
     <string name="text_edit_profile">Edit Profile</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">Batal</string>
@@ -152,4 +152,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="str_sign_up_now">Sign Up Now</string>
+    <string name="str_password">Password</string>
+    <string name="str_e_mail">E-mail</string>
+    <string name="str_phone_number">Phone Number</string>
+    <string name="str_last_name">Last Name</string>
+    <string name="str_first_name">First Name</string>
+    <string name="str_dftr_pengacara">Daftar sebagai Pengacara</string>
+    <string name="str_btn_resetpass">RESET PASSWORD</string>
 </resources>

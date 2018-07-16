@@ -1,4 +1,4 @@
-package lawyerku.android_mitra.ui;
+package lawyerku.android_mitra.ui.splash;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,13 +8,25 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
-import lawyerku.android_mitra.MainActivity;
-import lawyerku.android_mitra.R;
 
-public class SplashActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+import lawyerku.android_mitra.MainActivityCons;
+import lawyerku.android_mitra.R;
+import lawyerku.android_mitra.base.BaseActivity;
+import lawyerku.android_mitra.base.BaseApplication;
+import lawyerku.android_mitra.preference.GlobalPreference;
+import lawyerku.android_mitra.preference.PrefKey;
+import lawyerku.android_mitra.ui.LoginActivity;
+import lawyerku.android_mitra.ui.RegisterActivity;
+
+public class SplashActivity extends BaseActivity {
+
+  @Inject SplashPresenter presenter;
 
 
   private static int SPLASH_TIME_OUT = 3000;
@@ -25,6 +37,13 @@ public class SplashActivity extends AppCompatActivity {
     setContentView(R.layout.activity_splash_cons);
     transparentStatusBar();
     initMain();
+  }
+
+  @Override
+  protected void setupActivityComponent() {
+    BaseApplication.get(this).getAppComponent()
+            .plus(new SplashActivityModule(this))
+            .inject(this);
   }
 
   private void transparentStatusBar() {
@@ -65,13 +84,33 @@ public class SplashActivity extends AppCompatActivity {
       public void run() {
         // This method will be executed once the timer is over
         // Start your app main activity
-        Intent i = new Intent(SplashActivity.this, RegisterActivity.class);
-        startActivity(i);
+
+        initActivity();
 
         // close this activity
         finish();
       }
     }, SPLASH_TIME_OUT);
+
+  }
+
+  public void initActivity(){
+
+    boolean loggedIn = GlobalPreference.read(PrefKey.loggedIn,Boolean.class);
+
+    if(!loggedIn){
+//
+      Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+      startActivity(i);
+      Log.e("init", "initActivity: 1" );
+    }
+    if(loggedIn){
+//
+      Intent i = new Intent(SplashActivity.this, MainActivityCons.class);
+      startActivity(i);
+      Log.e("init", "initActivity: 2" );
+    }
+
 
   }
 

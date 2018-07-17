@@ -19,14 +19,15 @@ public class CredentialModel {
         public String email;
 
         // ====== Request for Register Workman
-//        public int level;
+        public int level;
 //        @SerializedName("have_smartphone") public boolean haveSmartphone;
-//        @SerializedName("address_1") public String address1;
+        @SerializedName("address_1") public String address1;
 //        @SerializedName("address_2") public String address2;
-//        @SerializedName("gps_latitude") public Double latitude;
-//        @SerializedName("gps_longitude") public Double longitude;
-//        @SerializedName("rate_min") public int rateMin;
-//        @SerializedName("rate_max") public int rateMax;
+        @SerializedName("gps_latitude") public Double latitude;
+        @SerializedName("gps_longitude") public Double longitude;
+        @SerializedName("rate_min") public int rateMin;
+        @SerializedName("rate_max") public int rateMax;
+        @SerializedName("rate_is_negotiable") public int rateNego;
 //        public List<Integer> languages;
 //        public List<Integer> jobs;
 
@@ -37,14 +38,17 @@ public class CredentialModel {
         public String first_name;
         public String last_name;
         public String role_id;
-        public String phone_number_1;
-        public String phone_number_2;
+        public String cellphone_number;
+        public String cellphone_number_2;
 
 
         @Override
         public String toString() {
             return "Request{" +
-                    "address='" + address + '\'' +
+                    "name='" + name + '\'' +
+                    ", nik='" + nik + '\'' +
+                    ", address='" + address + '\'' +
+                    ", phoneNumber='" + phoneNumber + '\'' +
                     ", email='" + email + '\'' +
                     ", username='" + username + '\'' +
                     ", password='" + password + '\'' +
@@ -52,8 +56,8 @@ public class CredentialModel {
                     ", first_name='" + first_name + '\'' +
                     ", last_name='" + last_name + '\'' +
                     ", role_id='" + role_id + '\'' +
-                    ", phone_number_1='" + phone_number_1 + '\'' +
-                    ", phone_number_2='" + phone_number_2 + '\'' +
+                    ", cellphone_number_1='" + cellphone_number + '\'' +
+                    ", cellphone_number_2='" + cellphone_number_2 + '\'' +
                     '}';
         }
     }
@@ -80,14 +84,27 @@ public class CredentialModel {
 
 
     public static class Success{
-        public String name;
+        public String username;
+        public int id;
+        public String email;
+        public int role_id;
+        public int userable_id;
+        public String userable_type;
+        public String update_at;
+        public String created_at;
         public String token;
 
         @Override
         public String toString() {
             return "Success{" +
-                    "name='" + name +
-                    ", token='" + token + '\'' +
+                    "username='" + username + '\'' +
+                    ", id=" + id +
+                    ", email='" + email + '\'' +
+                    ", role_id=" + role_id +
+                    ", userable_id=" + userable_id +
+                    ", userable_type='" + userable_type + '\'' +
+                    ", update_at='" + update_at + '\'' +
+                    ", created_at='" + created_at + '\'' +
                     '}';
         }
     }

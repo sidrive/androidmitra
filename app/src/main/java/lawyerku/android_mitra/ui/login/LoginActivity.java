@@ -1,4 +1,4 @@
-package lawyerku.android_mitra.ui;
+package lawyerku.android_mitra.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,12 +9,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
+import android.widget.TextView;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lawyerku.android_mitra.MainActivityCons;
 import lawyerku.android_mitra.R;
+import lawyerku.android_mitra.api.model.CredentialModel;
+import lawyerku.android_mitra.base.BaseActivity;
+import lawyerku.android_mitra.base.BaseApplication;
+import lawyerku.android_mitra.ui.ForgotPasswordActivity;
+import lawyerku.android_mitra.ui.RegisterActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
+
+  @Inject
+  LoginPresenter presenter;
+
+  @BindView(R.id.et_email)
+  TextView txtEmail;
+
+  @BindView(R.id.et_password)
+  TextView txtPassword;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +41,13 @@ public class LoginActivity extends AppCompatActivity {
     setContentView(R.layout.activity_login_cons);
     ButterKnife.bind(this);
     transparentStatusBar();
+  }
+
+  @Override
+  protected void setupActivityComponent() {
+    BaseApplication.get(this).getAppComponent()
+            .plus(new LoginActivityModule(this))
+            .inject(this);
   }
 
   private void transparentStatusBar() {
@@ -56,9 +82,27 @@ public class LoginActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
-  @OnClick(R.id.btn_login)
-  public void onBtnLoginClicked() {
-    Intent intent = new Intent(LoginActivity.this, MainActivityCons.class);
+  @OnClick(R.id.tv_register_ask)
+  public void onTvRegisterClicked(){
+    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
     startActivity(intent);
   }
+
+  @OnClick(R.id.btn_login)
+  public void showLogin(){
+
+    CredentialModel.Request credential = new CredentialModel.Request();
+    credential.email = txtEmail.getText().toString();
+    credential.password = txtPassword.getText().toString();
+
+    presenter.validateLogin(credential);
+
+//        Intent i = new Intent(LoginActivity.this, MainActivityCustomer.class);
+//        startActivity(i);
+  }
+
+    public void loginProses(){
+        Intent i = new Intent(LoginActivity.this, MainActivityCons.class);
+        startActivity(i);
+    }
 }

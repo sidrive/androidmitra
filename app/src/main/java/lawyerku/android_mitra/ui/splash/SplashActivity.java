@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
@@ -21,8 +20,7 @@ import lawyerku.android_mitra.base.BaseActivity;
 import lawyerku.android_mitra.base.BaseApplication;
 import lawyerku.android_mitra.preference.GlobalPreference;
 import lawyerku.android_mitra.preference.PrefKey;
-import lawyerku.android_mitra.ui.LoginActivity;
-import lawyerku.android_mitra.ui.RegisterActivity;
+import lawyerku.android_mitra.ui.login.LoginActivity;
 
 public class SplashActivity extends BaseActivity {
 

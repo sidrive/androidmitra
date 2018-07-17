@@ -6,13 +6,13 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lawyerku.android_mitra.R;
+import lawyerku.android_mitra.ui.login.LoginActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 

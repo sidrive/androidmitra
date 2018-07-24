@@ -5,18 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
-import butterknife.BindView;
 import lawyerku.mitra.R;
-import lawyerku.mitra.ui.DetailPerkara;
-
-import static android.content.ContentValues.TAG;
+import lawyerku.mitra.ui.DetailPerkaraActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,7 +78,7 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onClick(View arg0) {
 
-                Intent i = new Intent(getActivity(), DetailPerkara.class);
+                Intent i = new Intent(getActivity(), DetailPerkaraActivity.class);
                 startActivity(i);
 
             }

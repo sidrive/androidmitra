@@ -1,6 +1,5 @@
 package lawyerku.mitra.ui;
 
-import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,10 +33,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import lawyerku.mitra.MainActivity;
 import lawyerku.mitra.R;
 
-public class DetailPerkara extends AppCompatActivity implements OnCameraIdleListener,
+public class DetailPerkaraActivity extends AppCompatActivity implements OnCameraIdleListener,
     OnMapReadyCallback {
 
     @BindView(R.id.img_msg)
@@ -142,7 +140,7 @@ public class DetailPerkara extends AppCompatActivity implements OnCameraIdleList
 
     @OnClick(R.id.img_msg)
     public void onImgMsgClicked() {
-        Intent intent = new Intent(DetailPerkara.this, MessageActivity.class);
+        Intent intent = new Intent(DetailPerkaraActivity.this, MessageActivity.class);
         startActivity(intent);
     }
 

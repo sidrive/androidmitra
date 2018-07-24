@@ -163,4 +163,6 @@
     <string name="str_dftr_pengacara">Daftar sebagai Pengacara</string>
     <string name="str_btn_resetpass">RESET PASSWORD</string>
     <string name="str_register">CREATE AN ACCOUNT</string>
+
+    <string name="ijin_lokasi">Membutuhkan ijin untuk akses lokasi</string>
 </resources>

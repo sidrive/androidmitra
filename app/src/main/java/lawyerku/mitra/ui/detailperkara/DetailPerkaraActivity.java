@@ -1,5 +1,6 @@
-package lawyerku.mitra.ui;
+package lawyerku.mitra.ui.detailperkara;
 
+import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -21,6 +22,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -30,25 +32,60 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lawyerku.mitra.MainActivityCons;
 import lawyerku.mitra.R;
+import lawyerku.mitra.api.model.PerkaraModel;
+import lawyerku.mitra.base.BaseActivity;
+import lawyerku.mitra.base.BaseApplication;
+import lawyerku.mitra.ui.MessageActivity;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
-public class DetailPerkaraActivity extends AppCompatActivity implements OnCameraIdleListener,
+public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleListener,
     OnMapReadyCallback {
+
+    @Inject
+    DetailPerkaraPresenter presenter;
 
     @BindView(R.id.img_msg)
     ImageView imgMsg;
-    @BindView(R.id.btn_bayar)
-    Button btnBayar;
+
     @BindView(R.id.img_maps)
     ImageView imgMaps;
+
+    @BindView(R.id.tv_nama_customer)
+    TextView txtNamaCustomer;
+
+    @BindView(R.id.tv_bidang_hukum)
+    TextView txtbidangHukum;
+
+    @BindView(R.id.tv_desc)
+    TextView txtdescription;
+
+    @BindView(R.id.tv_nama_lawyer)
+    TextView txtnamaLawyer;
+
+    @BindView(R.id.tv_telp)
+    TextView txttelpLawyer;
+
+    @BindView(R.id.tv_hp)
+    TextView txthpLawyer;
+
     private GoogleMap mMap;
     private LocationManager lm;
     private Location mlocation;
     private double latitude = 0;
     private double longitude = 0;
+
+    private static final int RC_LOC_PERM = 1001;
+    public static int id;
 
 
     @Override
@@ -57,9 +94,33 @@ public class DetailPerkaraActivity extends AppCompatActivity implements OnCamera
         setContentView(R.layout.activity_detail_perkara_cons);
         ButterKnife.bind(this);
 
-        LatLng indo = new LatLng(-7.803249, 110.3398253);
-        initMap(indo);
+        Bundle bundle = getIntent().getExtras();
+        Log.e("detailperkara", "onCreate: "+bundle );
+        id = Integer.parseInt(bundle.getString("id"));
+        locationTask();
         transparentStatusBar();
+
+        presenter.getProject(id);
+    }
+
+    @AfterPermissionGranted(RC_LOC_PERM)
+    public void locationTask() {
+        String[] perms = {Manifest.permission.ACCESS_COARSE_LOCATION};
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            // Have permission, do the thing!
+//            onLaunchCamera();
+        } else {
+            // Ask for one permission
+            EasyPermissions.requestPermissions(this, getString(R.string.ijin_lokasi),
+                    RC_LOC_PERM, perms);
+        }
+    }
+
+    @Override
+    protected void setupActivityComponent() {
+        BaseApplication.get(this).getAppComponent()
+                .plus(new DetailPerkaraActivityModule(this))
+                .inject(this);
     }
 
     private void transparentStatusBar(){
@@ -99,7 +160,7 @@ public class DetailPerkaraActivity extends AppCompatActivity implements OnCamera
 
         LatLng indonesia = new LatLng(mlocation.getLatitude(), mlocation.getLongitude());
         Log.e("map", "initMap: " + indonesia);
-        initMap(indonesia);
+//        initMap(indonesia);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(indonesia, 16));
         mMap.setOnCameraIdleListener(this);
         if (ActivityCompat.checkSelfPermission(this, permission.ACCESS_FINE_LOCATION)
@@ -144,41 +205,36 @@ public class DetailPerkaraActivity extends AppCompatActivity implements OnCamera
         startActivity(intent);
     }
 
-    @OnClick(R.id.btn_bayar)
-    public void onBtnBayarClicked() {
-        LayoutInflater li = LayoutInflater.from(this);
-        View promptsView = li.inflate(R.layout.activity_purchase_cons, null);
 
-        Builder alertDialogBuilder = new Builder(
-            this, R.style.MyAlertDialogStyle);
-
-        // set prompts.xml to alertdialog builder
-        alertDialogBuilder.setView(promptsView);
-//        final Button btnAccept = (Button) promptsView
-//                .findViewById(R.id.btnAccept);
-
-//        userInput.setText(String.valueOf(barang.getStokBarang()));
-        // set dialog message
-        alertDialogBuilder
-            .setCancelable(true);
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-//        btnDecline.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View arg0) {
-//
-//                alertDialog.dismiss();
-//
-//            }
-//        });
-
-        // show it
-        alertDialog.show();
-    }
 
     @OnClick(R.id.img_maps)
     public void onViewClicked() {
+    }
+
+    public void initProject(List<PerkaraModel.Response.Data> data) {
+        Log.e("DetailPerkara", "initProject: "+data );
+        LatLng latLng = new LatLng(data.get(0).gps_latitude,data.get(0).gps_longitud);
+        initMap(latLng);
+        txtNamaCustomer.setText(data.get(0).customer.name);
+        txtbidangHukum.setText(data.get(0).jobskill.name);
+        txtdescription.setText(data.get(0).description);
+        txtnamaLawyer.setText(data.get(0).lawyer.lawyername);
+        txthpLawyer.setText(data.get(0).lawyer.lawyerPhone2);
+        txttelpLawyer.setText(data.get(0).lawyer.lawyerPhone1);
+    }
+
+    @OnClick(R.id.btn_approve)
+    public void approvePerkara(){
+        presenter.approveProject(id,true);
+    }
+
+    @OnClick(R.id.btn_reject)
+    public void rejectPerkara(){
+        presenter.approveProject(id,false);
+    }
+
+    public void gotoMain() {
+        Intent intent = new Intent(DetailPerkaraActivity.this, MainActivityCons.class);
+        startActivity(intent);
     }
 }

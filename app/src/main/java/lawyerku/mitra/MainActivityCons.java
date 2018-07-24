@@ -1,5 +1,6 @@
 package lawyerku.mitra;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,26 +12,23 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lawyerku.mitra.api.model.PerkaraModel;
-import lawyerku.mitra.mainfragment.HistoryFragment;
 import lawyerku.mitra.mainfragment.HistoryFragment.OnFragmentInteractionListener;
 import lawyerku.mitra.mainfragment.PerkaraNewFragment;
 import lawyerku.mitra.mainfragment.ViewPagerAdapter;
-import lawyerku.mitra.preference.GlobalPreference;
-import lawyerku.mitra.preference.PrefKey;
-import lawyerku.mitra.ui.DetailPerkaraActivity;
+import lawyerku.mitra.ui.detailperkara.DetailPerkaraActivity;
 import lawyerku.mitra.ui.DetailProfileActivity;
 import lawyerku.mitra.ui.MessageActivity;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivityCons extends AppCompatActivity implements PerkaraNewFragment.OnFragmentInteractionListener,
     OnFragmentInteractionListener {
@@ -42,6 +40,8 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
   TabLayout tlLawyer;
   @BindView(R.id.vp_lawyer)
   ViewPager vpLawyer;
+
+  private static final int RC_LOC_PERM = 1001;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +58,21 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
     setSupportActionBar(tbMain);
     getSupportActionBar().setTitle("Home");
 
+    locationTask();
+
+  }
+
+  @AfterPermissionGranted(RC_LOC_PERM)
+  public void locationTask() {
+    String[] perms = {Manifest.permission.ACCESS_COARSE_LOCATION};
+    if (EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+      // Have permission, do the thing!
+//            onLaunchCamera();
+    } else {
+      // Ask for one permission
+      EasyPermissions.requestPermissions(this, getString(R.string.ijin_lokasi),
+              RC_LOC_PERM, perms);
+    }
   }
 
   private void transparentStatusBar() {

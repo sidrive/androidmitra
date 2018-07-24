@@ -49,11 +49,31 @@ public interface LawyerkuService {
 //    Observable<ProfileModel.Response> getProfile(@Header("Authorization") String header);
     Observable<Throwable> getProfile(@Header("Authorization") String header);
 
+    //    ==============================================================
+    //                      PROJECT
+    //    ==============================================================
+
+    @Headers("Content-Type:application/json")
+    @GET("api/projects/new/get")
+    Observable<PerkaraModel.Response> getProjectNew(
+            @Header("Authorization") String header );
 
     @Headers("Content-Type:application/json")
     @GET("api/projects")
-    Observable<PerkaraModel.Response> getProjectNew(
+    Observable<PerkaraModel.Response> getListProject(
             @Header("Authorization") String header );
+
+    @Headers("Content-Type:application/json")
+    @GET("api/projects/{idProject}")
+    Observable<PerkaraModel.Response> getProject(
+            @Header("Authorization") String header,
+            @Path ("idProject") String idProject );
+
+    @Headers("Content-Type:application/json")
+    @POST("api/projects/setStatus")
+    Observable<PerkaraModel.ResponseSetStatus> approveProject(
+            @Header("Authorization") String header,
+            @Body PerkaraModel.Status body );
 
 
     //    ==============================================================

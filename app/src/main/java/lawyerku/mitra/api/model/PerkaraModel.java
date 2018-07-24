@@ -131,6 +131,21 @@ public class PerkaraModel {
         }
     }
 
+    public static class ResponseSetStatus{
+        public int status;
+        public String message;
+        public List<Status> data;
+
+        @Override
+        public String toString() {
+            return "ResponseSetStatus{" +
+                    "status=" + status +
+                    ", message='" + message + '\'' +
+                    ", data=" + data +
+                    '}';
+        }
+    }
+
     public static class Status {
         public int id;
         public String status;

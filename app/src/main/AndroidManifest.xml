@@ -37,7 +37,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".ui.DetailPerkaraActivity"
+      android:name=".ui.detailperkara.DetailPerkaraActivity"
       android:theme="@style/AppTheme"
       android:windowSoftInputMode="stateHidden"/>
     <activity

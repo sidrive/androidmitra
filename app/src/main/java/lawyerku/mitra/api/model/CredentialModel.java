@@ -64,8 +64,8 @@ public class CredentialModel {
 
     public static class RegistrationResponse {
         public int status;
+        public Data data;
         public Error message;
-        public Request data;
         public Success success;
         public String error;
 
@@ -116,6 +116,19 @@ public class CredentialModel {
         public String message;
         public String userType;
         public Success success;
+        public Data data;
+
+        @Override
+        public String toString() {
+            return "LoginResponse{" +
+                    "status=" + status +
+                    ", accessToken='" + accessToken + '\'' +
+                    ", message='" + message + '\'' +
+                    ", userType='" + userType + '\'' +
+                    ", success=" + success +
+                    ", data=" + data +
+                    '}';
+        }
     }
 
     public static class Error{
@@ -138,5 +151,16 @@ public class CredentialModel {
         public List<String> jobs;
         public List<String> username;
         public List<String> password;
+    }
+
+    public static class Data{
+        public String token;
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "token='" + token + '\'' +
+                    '}';
+        }
     }
 }

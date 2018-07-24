@@ -11,6 +11,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,10 +21,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lawyerku.mitra.api.model.PerkaraModel;
 import lawyerku.mitra.mainfragment.HistoryFragment;
 import lawyerku.mitra.mainfragment.HistoryFragment.OnFragmentInteractionListener;
 import lawyerku.mitra.mainfragment.PerkaraNewFragment;
 import lawyerku.mitra.mainfragment.ViewPagerAdapter;
+import lawyerku.mitra.preference.GlobalPreference;
+import lawyerku.mitra.preference.PrefKey;
+import lawyerku.mitra.ui.DetailPerkaraActivity;
 import lawyerku.mitra.ui.DetailProfileActivity;
 import lawyerku.mitra.ui.MessageActivity;
 
@@ -106,6 +111,15 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
 
   @Override
   public void onFragmentInteraction(Uri uri) {
+
+  }
+
+  public void detailLawyer(PerkaraModel.Response.Data perkara) {
+    Intent i = new Intent(MainActivityCons.this, DetailPerkaraActivity.class);
+    Bundle bundle = new Bundle();
+    bundle.putString("id", String.valueOf(perkara.id));
+    i.putExtras(bundle);
+    startActivity(i);
 
   }
 }

@@ -40,11 +40,11 @@ public class LoginPresenter implements BasePresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    Log.e(TAG, "validateLogin: "+response.success.token );
+                    Log.e(TAG, "validateLogin: "+response.data.token );
 
-                    if(response.success.token != null){
+                    if(response.data.token != null){
                         GlobalPreference.write(PrefKey.loggedIn, true, Boolean.class);
-                        GlobalPreference.write(PrefKey.accessToken, String.format(Locale.US, "Bearer %s", response.accessToken), String.class);
+                        GlobalPreference.write(PrefKey.accessToken, String.format(Locale.US, "Bearer %s", response.data.token), String.class);
                         activity.loginProses();
                     }
 
@@ -59,19 +59,14 @@ public class LoginPresenter implements BasePresenter {
 //                            //listener.onError(App.getContext().getString(R.string.error_unauthenticated));
 //                            listener.onError(response.message);
 //                        }
-                        String token = response.accessToken;
-                        subscription.add(LawyerkuService.Factory.create().getProfile(token)
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe());
-//                        activity.loginProses();
+
 
                     }
 //                    listener.hideLoading();
                     Log.e(TAG, "validateLogin: "+response.message );
                 }, throwable -> {
 //                    String msg = ErrorUtils.getError(throwable);
-                    Log.e("loginNow", "CredentialPresenter : Error bro");
+                    Log.e("loginNow", "CredentialPresenter :"+throwable);
 //                    int errorCode = ((HttpException) throwable).response().code();
 //                    if (errorCode > 400)
 //                        listener.onError(App.getContext().getString(R.string.error_general));

@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import lawyerku.mitra.BuildConfig;
 import lawyerku.mitra.api.model.CredentialModel;
+import lawyerku.mitra.api.model.PerkaraModel;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -14,6 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 
 public interface LawyerkuService {
@@ -46,6 +48,12 @@ public interface LawyerkuService {
     @GET("api/me")
 //    Observable<ProfileModel.Response> getProfile(@Header("Authorization") String header);
     Observable<Throwable> getProfile(@Header("Authorization") String header);
+
+
+    @Headers("Content-Type:application/json")
+    @GET("api/projects")
+    Observable<PerkaraModel.Response> getProjectNew(
+            @Header("Authorization") String header );
 
 
     //    ==============================================================

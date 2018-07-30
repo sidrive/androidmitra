@@ -58,7 +58,7 @@ public class AdapterPerkara extends RecyclerView.Adapter<AdapterPerkara.ViewHold
         holder.txtKeahlian.setText("Keahlian : "+perkara.jobskill.name);
         holder.txtStatus.setText("Status Perkara : "+perkara.last_status.status);
 
-
+        activity.lawyerId(perkara.lawyer_id);
     }
 
     @Override

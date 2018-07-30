@@ -23,6 +23,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -233,7 +234,12 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
         presenter.approveProject(id,false);
     }
 
-    public void gotoMain() {
+    public void gotoMain(boolean approve) {
+        if(approve){
+            Toast.makeText(this, "Project Berhasil di Setujui, SIlahkan tunggu konfirmasi admin", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "Project Berhasil di Batalkan", Toast.LENGTH_SHORT).show();
+        }
         Intent intent = new Intent(DetailPerkaraActivity.this, MainActivityCons.class);
         startActivity(intent);
     }

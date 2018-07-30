@@ -1,4 +1,4 @@
-package lawyerku.mitra.ui;
+package lawyerku.mitra.ui.profilelawyer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,28 +10,43 @@ import android.graphics.Color;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import lawyerku.mitra.MainActivity;
 import lawyerku.mitra.MainActivityCons;
 import lawyerku.mitra.R;
+import lawyerku.mitra.api.model.LawyerModel;
+import lawyerku.mitra.base.BaseActivity;
+import lawyerku.mitra.base.BaseApplication;
+import lawyerku.mitra.preference.GlobalPreference;
+import lawyerku.mitra.preference.PrefKey;
 
-public class DetailProfileActivity extends AppCompatActivity {
+public class DetailProfileActivity extends BaseActivity {
+
+  @Inject
+  DetailProfilePresenter presenter;
 
   @BindView(R.id.img_topup)
   ImageButton imgTopup;
   @BindView(R.id.btn_save)
   Button btnSave;
+
+  public static int id;
+  public static String accessToken;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +54,21 @@ public class DetailProfileActivity extends AppCompatActivity {
     setContentView(R.layout.activity_profile_cons);
     ButterKnife.bind(this);
     transparentStatusBar();
+
+    Bundle bundle = getIntent().getExtras();
+    id = Integer.parseInt(bundle.getString("id"));
+
+    accessToken = GlobalPreference.read(PrefKey.accessToken, String.class);
+    initProfile(accessToken,id);
+  }
+
+
+
+  @Override
+  protected void setupActivityComponent() {
+    BaseApplication.get(this).getAppComponent()
+            .plus(new DetailProfileActivityModule(this))
+            .inject(this);
   }
 
   private void transparentStatusBar() {
@@ -117,5 +147,14 @@ public class DetailProfileActivity extends AppCompatActivity {
     Toast.makeText(this, "Profile Berhasil Disimpan", Toast.LENGTH_SHORT).show();
     Intent i = new Intent(DetailProfileActivity.this, MainActivityCons.class);
     startActivity(i);
+  }
+
+  private void initProfile(String accessToken,int id) {
+    presenter.getProfile(accessToken,id);
+  }
+
+  public void showProfile(List<LawyerModel.Data> data) {
+    Log.e("profileLawyer", "showProfile: "+data );
+
   }
 }

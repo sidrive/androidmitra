@@ -77,7 +77,7 @@ public class DetailPerkaraPresenter implements BasePresenter {
 
                     if (response.status >= 200 && response.status < 300) {
 
-                        activity.gotoMain();
+                        activity.gotoMain(approve);
 
                     } else {
 //                        profileListener.onError(response.message);

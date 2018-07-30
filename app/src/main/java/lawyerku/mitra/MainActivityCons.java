@@ -12,6 +12,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +26,7 @@ import lawyerku.mitra.mainfragment.HistoryFragment.OnFragmentInteractionListener
 import lawyerku.mitra.mainfragment.PerkaraNewFragment;
 import lawyerku.mitra.mainfragment.ViewPagerAdapter;
 import lawyerku.mitra.ui.detailperkara.DetailPerkaraActivity;
-import lawyerku.mitra.ui.DetailProfileActivity;
+import lawyerku.mitra.ui.profilelawyer.DetailProfileActivity;
 import lawyerku.mitra.ui.MessageActivity;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -42,6 +43,7 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
   ViewPager vpLawyer;
 
   private static final int RC_LOC_PERM = 1001;
+  public static int lawyerId;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
     getSupportActionBar().setTitle("Home");
 
     locationTask();
+
 
   }
 
@@ -113,6 +116,9 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
     switch (item.getItemId()) {
       case R.id.action_profile:
         Intent intent = new Intent(MainActivityCons.this, DetailProfileActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("id",String.valueOf(lawyerId));
+        intent.putExtras(bundle);
         startActivity(intent);
         break;
       case R.id.action_message:
@@ -136,5 +142,9 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
     i.putExtras(bundle);
     startActivity(i);
 
+  }
+
+  public void lawyerId(int lawyer_id) {
+    lawyerId = lawyer_id;
   }
 }

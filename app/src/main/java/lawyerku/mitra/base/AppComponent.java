@@ -7,6 +7,8 @@ import lawyerku.mitra.ui.detailperkara.DetailPerkaraActivityComponent;
 import lawyerku.mitra.ui.detailperkara.DetailPerkaraActivityModule;
 import lawyerku.mitra.ui.login.LoginActivityComponent;
 import lawyerku.mitra.ui.login.LoginActivityModule;
+import lawyerku.mitra.ui.profilelawyer.DetailProfileActivityComponent;
+import lawyerku.mitra.ui.profilelawyer.DetailProfileActivityModule;
 import lawyerku.mitra.ui.register.RegisterActivityComponent;
 import lawyerku.mitra.ui.register.RegisterActivityModule;
 import lawyerku.mitra.ui.splash.SplashActivityComponent;
@@ -29,4 +31,6 @@ public interface AppComponent {
         RegisterActivityComponent plus(RegisterActivityModule activityModule);
 
         DetailPerkaraActivityComponent plus(DetailPerkaraActivityModule activityModule);
+
+        DetailProfileActivityComponent plus(DetailProfileActivityModule activityModule);
 }

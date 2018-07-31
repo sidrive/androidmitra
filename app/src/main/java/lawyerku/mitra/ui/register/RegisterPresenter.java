@@ -51,7 +51,7 @@ public class RegisterPresenter implements BasePresenter{
                 .subscribe(response -> {
 //                    listener.hideLoading();
                     Log.e(TAG, "register: "+response );
-                    if(response.success != null){
+                    if(response.data != null){
                         login();
                     }
 

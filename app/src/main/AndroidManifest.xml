@@ -26,16 +26,7 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity
-      android:name=".MainActivityCons"
-      android:theme="@style/AppTheme"
-      android:windowSoftInputMode="stateHidden">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
 
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
-    </activity>
     <activity
       android:name=".ui.detailperkara.DetailPerkaraActivity"
       android:theme="@style/AppTheme"
@@ -60,6 +51,10 @@
       android:name=".ui.ForgotPasswordActivity"
       android:theme="@style/AppTheme"
       android:windowSoftInputMode="stateHidden"/>
+    <activity
+        android:name=".MainActivityCons"
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="stateHidden"/>
   </application>
 
 

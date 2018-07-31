@@ -56,7 +56,7 @@ public class CredentialModel {
                     ", first_name='" + first_name + '\'' +
                     ", last_name='" + last_name + '\'' +
                     ", role_id='" + role_id + '\'' +
-                    ", cellphone_number_1='" + cellphone_number + '\'' +
+                    ", cellphone_number='" + cellphone_number + '\'' +
                     ", cellphone_number_2='" + cellphone_number_2 + '\'' +
                     '}';
         }
@@ -64,9 +64,8 @@ public class CredentialModel {
 
     public static class RegistrationResponse {
         public int status;
-        public Data data;
-        public Error message;
-        public Success success;
+        public Success data;
+        public String message;
         public String error;
 
         @Override
@@ -75,7 +74,6 @@ public class CredentialModel {
                     "status=" + status +
                     ", message=" + message +
                     ", data=" + data +
-                    ", success=" + success +
                     ", error='" + error + '\'' +
                     '}';
         }

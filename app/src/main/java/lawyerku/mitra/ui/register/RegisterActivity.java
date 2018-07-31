@@ -66,15 +66,15 @@ public class RegisterActivity extends BaseActivity {
     ButterKnife.bind(this);
     transparentStatusBar();
 
-    txtUsername.setText("wirosableng");
-    txtEmail.setText("wiro@sbaleng.com");
-    txtPassword.setText("123456");
-    txtCpassword.setText("123456");
-    txtFirstName.setText("wiro");
-    txtLastName.setText("sableng");
-    txtAddress.setText("gunung kelud");
-    txtPhone.setText("083123131");
-    txtIdnumber.setText("321451413131");
+//    txtUsername.setText("wirosableng");
+//    txtEmail.setText("wiro@sbaleng.com");
+//    txtPassword.setText("123456");
+//    txtCpassword.setText("123456");
+//    txtFirstName.setText("wiro");
+//    txtLastName.setText("sableng");
+//    txtAddress.setText("gunung kelud");
+//    txtPhone.setText("083123131");
+//    txtIdnumber.setText("321451413131");
 
   }
 

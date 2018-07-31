@@ -112,7 +112,7 @@ public class CredentialModel {
         public int status;
         public String accessToken;
         public String message;
-        public String userType;
+        public String error;
         public Success success;
         public Data data;
 
@@ -122,7 +122,7 @@ public class CredentialModel {
                     "status=" + status +
                     ", accessToken='" + accessToken + '\'' +
                     ", message='" + message + '\'' +
-                    ", userType='" + userType + '\'' +
+                    ", userType='" + error + '\'' +
                     ", success=" + success +
                     ", data=" + data +
                     '}';

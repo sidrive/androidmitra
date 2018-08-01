@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@drawable/bg_grad1"
@@ -47,6 +48,20 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/res_9dp"
+            android:layout_marginBottom="@dimen/res_9dp"
+            android:text="Nama"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_saldo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_profile"
+            />
 
         <TextView
           android:id="@+id/tv_saldo"
@@ -78,85 +93,236 @@
           />
 
         <android.support.design.widget.TextInputLayout
-          android:id="@+id/til_nama"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          app:layout_constraintBottom_toTopOf="@id/til_phone"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/img_topup"
-          >
+            android:id="@+id/til_nama"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/til_last_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_topup"
+            >
 
           <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_nama"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Name"
-            android:textColor="@color/colorWhite"
-            android:inputType="text"
-            />
+              android:id="@+id/et_first_name"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="First Name"
+              android:textColor="@color/colorWhite"
+              android:inputType="text"
+              />
 
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
-          android:id="@+id/til_phone"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          app:layout_constraintBottom_toTopOf="@id/til_email"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/til_nama"
-          >
+            android:id="@+id/til_last_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/til_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_nama"
+            >
 
           <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_phone"
-            android:layout_width="match_parent"
+              android:id="@+id/et_last_name"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="Last Name"
+              android:textColor="@color/colorWhite"
+              android:inputType="text"
+              />
+
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_address"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:hint="Phone"
-            android:inputType="phone"
-            />
+            app:layout_constraintBottom_toTopOf="@id/til_csmap"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_last_name"
+            >
+
+          <android.support.design.widget.TextInputEditText
+              android:id="@+id/et_address"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="Address"
+              android:textColor="@color/colorWhite"
+              android:inputType="text"
+              />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-          android:id="@+id/til_email"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          app:layout_constraintBottom_toTopOf="@id/til_password"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/til_phone"
-          >
-
-          <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:hint="E-mail"
-            android:inputType="textEmailAddress"
-            />
+            android:id="@+id/til_csmap"
+            app:layout_constraintBottom_toTopOf="@id/til_idcard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_address">
+          <android.support.design.widget.TextInputEditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Pilih Alamat Dari Peta"
+              android:focusable="false"
+              android:editable="false"
+              android:textColor="@color/colorWhite"
+              android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+              android:id="@+id/et_csmap"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_idcard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/til_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_csmap"
+            >
+
+          <android.support.design.widget.TextInputEditText
+              android:id="@+id/et_idcard"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="No.KTP/SIM"
+              android:textColor="@color/colorWhite"
+              android:inputType="text"
+              />
 
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
-          android:id="@+id/til_password"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          app:layout_constraintBottom_toTopOf="@id/btn_save"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/til_email"
-          >
+            android:id="@+id/til_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/til_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_idcard"
+            >
 
           <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:hint="Password"
-            android:inputType="textPassword"
-            />
+              android:id="@+id/et_phone"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textColor="@color/colorWhite"
+              android:hint="Phone"
+              android:inputType="phone"
+              />
+
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/til_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_phone"
+            >
+
+          <android.support.design.widget.TextInputEditText
+              android:id="@+id/et_email"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textColor="@color/colorWhite"
+              android:hint="E-mail"
+              android:focusable="false"
+              android:editable="false"
+              />
+
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/lnBahasa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_email"
+            android:visibility="gone"
+            >
+
+          <android.support.design.widget.TextInputEditText
+              android:id="@+id/et_password"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textColor="@color/colorWhite"
+              android:hint="Password"
+              android:inputType="textPassword"
+              />
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/lnBahasa"
+            app:layout_constraintBottom_toTopOf="@id/lnBidang"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_password">
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Bahasa"
+              android:textColor="@color/colorShadow2"/>
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/chkIndonesia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Indonesia"
+                android:textColor="@color/colorWhite"/>
+            <CheckBox
+                android:id="@+id/chkInggris"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Inggris"/>
+          </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/res_32dp"
+            android:orientation="vertical"
+            android:id="@+id/lnBidang"
+            app:layout_constraintBottom_toTopOf="@id/btn_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lnBahasa">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bidang"
+            android:textColor="@color/colorShadow2"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+          <CheckBox
+              android:id="@+id/chkPidana"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Pidana"
+              android:textColor="@color/colorWhite"/>
+          <CheckBox
+              android:id="@+id/chkPerdata"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/colorWhite"
+              android:text="Perdata"/>
+        </LinearLayout>
+        </LinearLayout>
+
 
         <Button
           android:id="@+id/btn_save"
@@ -169,11 +335,56 @@
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/til_password"
+          app:layout_constraintTop_toBottomOf="@id/lnBidang"
           />
       </android.support.constraint.ConstraintLayout>
+
+
     </android.support.v7.widget.CardView>
 
+
+
   </ScrollView>
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:orientation="vertical"
+      android:id="@+id/rel_map"
+      android:visibility="gone"
+      android:layout_height="match_parent"
+      android:background="@color/colorWhite"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".base.ui.add_location.AddLocationActivity"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_marker"
+        android:layout_centerInParent="true"
+        android:paddingBottom="32dp"
+        android:src="@drawable/ic_place_red_24dp"/>
+
+    <Button
+        android:id="@+id/btnSimpanMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="18dp"
+        android:text="Simpan Lokasi" />
+
+
+
+  </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -3,6 +3,7 @@ package lawyerku.mitra.ui.profilelawyer;
 import android.util.Log;
 
 import lawyerku.mitra.api.LawyerkuService;
+import lawyerku.mitra.api.model.LawyerModel;
 import lawyerku.mitra.base.BasePresenter;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
@@ -41,6 +42,27 @@ public class DetailProfilePresenter implements BasePresenter {
                     if (response.status >= 200 && response.status < 300) {
 
                         activity.showProfile(response.data);
+
+                    } else {
+//                        profileListener.onError(response.message);
+                    }
+                }, throwable -> {
+                    int errorCode = ((HttpException) throwable).response().code();
+//                    if (errorCode > 400)
+//                        profileListener.onError(App.getContext().getString(R.string.error_general));
+//                    profileListener.hideLoading();
+                }));
+    }
+
+    public void update(LawyerModel.DataUpdate lawyer, String accessToken) {
+        subscription.add(LawyerkuService.Factory.create().updateLawyer(accessToken,lawyer)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    Log.e("updateprofile", "getAccount: "+response );
+                    if (response.status >= 200 && response.status < 300) {
+
+                        activity.showMain();
 
                     } else {
 //                        profileListener.onError(response.message);

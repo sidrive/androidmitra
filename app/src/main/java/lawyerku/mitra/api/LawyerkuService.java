@@ -16,6 +16,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import rx.Observable;
 
@@ -56,6 +57,12 @@ public interface LawyerkuService {
             (@Header("Authorization") String header,
             @Path("id") String id);
 
+    @Headers("Accept:application/json")
+    @PUT("api/lawyers/update")
+    Observable<LawyerModel.ResponseUpdate> updateLawyer
+            (@Header("Authorization") String header,
+             @Body LawyerModel.DataUpdate body);
+
     //    ==============================================================
     //                      PROJECT
     //    ==============================================================
@@ -64,6 +71,12 @@ public interface LawyerkuService {
     @GET("api/projects/new/get")
     Observable<PerkaraModel.Response> getProjectNew(
             @Header("Authorization") String header );
+
+    @Headers("Content-Type:application/json")
+    @GET("api/projects/{status}/get")
+    Observable<PerkaraModel.Response> getDataProject(
+            @Header("Authorization") String header,
+            @Path("status") String status );
 
     @Headers("Content-Type:application/json")
     @GET("api/projects")

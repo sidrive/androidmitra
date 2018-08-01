@@ -46,6 +46,7 @@ import lawyerku.mitra.api.model.PerkaraModel;
 import lawyerku.mitra.base.BaseActivity;
 import lawyerku.mitra.base.BaseApplication;
 import lawyerku.mitra.ui.MessageActivity;
+import lawyerku.mitra.utils.DateFormatter;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -78,6 +79,15 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
 
     @BindView(R.id.tv_hp)
     TextView txthpLawyer;
+
+    @BindView(R.id.tv_status)
+    TextView txtStatus;
+
+    @BindView(R.id.tv_tgl_mulai)
+    TextView txtStartDate;
+
+    @BindView(R.id.tv_tgl_selesai)
+    TextView txtEndDate;
 
     private GoogleMap mMap;
     private LocationManager lm;
@@ -222,6 +232,33 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
         txtnamaLawyer.setText(data.get(0).lawyer.lawyername);
         txthpLawyer.setText(data.get(0).lawyer.lawyerPhone2);
         txttelpLawyer.setText(data.get(0).lawyer.lawyerPhone1);
+
+        if(data.get(0).last_status.status.equals("new"))
+        {
+            txtStatus.setText("Status : Baru");
+        }
+        if(data.get(0).last_status.status.equals("on-progress"))
+        {
+            txtStatus.setText("Status : Sedang Berlangsung");
+        }
+        if(data.get(0).last_status.status.equals("rejected"))
+        {
+            txtStatus.setText("Status : Ditolak");
+        }
+        if(data.get(0).last_status.status.equals("canceled"))
+        {
+            txtStatus.setText("Status : Dibatalkan");
+        }
+        if(data.get(0).last_status.status.equals("finished"))
+        {
+            txtStatus.setText("Status : Selesai");
+        }
+
+        String starDate = DateFormatter.getDate(data.get(0).start_date,"yyyy-MM-dd");
+        String endDate = DateFormatter.getDate(data.get(0).end_date,"yyyy-MM-dd");
+
+        txtStartDate.setText(starDate);
+        txtEndDate.setText(endDate);
     }
 
     @OnClick(R.id.btn_approve)

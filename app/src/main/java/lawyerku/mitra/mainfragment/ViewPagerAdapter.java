@@ -15,11 +15,20 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
         Fragment fragment = null;
         if (position == 0)
         {
-            fragment = new HistoryFragment();
+            fragment = new PerkaraOnProgressFragment();
         }
         else if (position == 1)
         {
             fragment = new PerkaraNewFragment();
+        }
+        else if (position == 2)
+        {
+            fragment = new PerkaraRejectedFragment();
+        }
+        else if (position == 3)
+        {
+
+            fragment = new HistoryFragment();
         }
 
         return fragment;
@@ -27,7 +36,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
-        return 2;
+        return 4;
     }
 
     @Override
@@ -35,11 +44,19 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
         String title = null;
         if (position == 0)
         {
-            title = "History";
+            title = "On Progress";
         }
         else if (position == 1)
         {
-            title = "Perkara Baru";
+            title = "New Case";
+        }
+        else if (position == 2)
+        {
+            title = "Rejected Case";
+        }
+        else if (position == 3)
+        {
+            title = "History";
         }
 
         return title;

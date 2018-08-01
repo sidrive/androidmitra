@@ -22,8 +22,11 @@ import android.view.WindowManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lawyerku.mitra.api.model.PerkaraModel;
+import lawyerku.mitra.mainfragment.HistoryFragment;
 import lawyerku.mitra.mainfragment.HistoryFragment.OnFragmentInteractionListener;
 import lawyerku.mitra.mainfragment.PerkaraNewFragment;
+import lawyerku.mitra.mainfragment.PerkaraOnProgressFragment;
+import lawyerku.mitra.mainfragment.PerkaraRejectedFragment;
 import lawyerku.mitra.mainfragment.ViewPagerAdapter;
 import lawyerku.mitra.ui.detailperkara.DetailPerkaraActivity;
 import lawyerku.mitra.ui.profilelawyer.DetailProfileActivity;
@@ -32,7 +35,9 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivityCons extends AppCompatActivity implements PerkaraNewFragment.OnFragmentInteractionListener,
-    OnFragmentInteractionListener {
+        PerkaraOnProgressFragment.OnFragmentInteractionListener,
+        PerkaraRejectedFragment.OnFragmentInteractionListener,
+        HistoryFragment.OnFragmentInteractionListener{
 
   ViewPagerAdapter viewPagerAdapter;
   @BindView(R.id.tb_main)

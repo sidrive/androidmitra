@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -206,5 +208,34 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
     GlobalPreference.clear();
     Intent intent = new Intent(MainActivityCons.this, SplashActivity.class);
     startActivity(intent);
+  }
+  boolean doubleBackToExitPressedOnce = false;
+
+  @Override
+  public void onBackPressed() {
+//    startActivity(new Intent(MainActivityCustomer.this, MainActivityCustomer.class));
+//    finish();
+    if (doubleBackToExitPressedOnce) {
+      //super.onBackPressed();
+
+      Intent intent = new Intent(Intent.ACTION_MAIN);
+      intent.addCategory(Intent.CATEGORY_HOME);
+      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+      startActivity(intent);
+      finish();
+      System.exit(0);
+      return;
+    }
+
+    this.doubleBackToExitPressedOnce = true;
+    Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+    new Handler().postDelayed(new Runnable() {
+
+      @Override
+      public void run() {
+        doubleBackToExitPressedOnce = false;
+      }
+    }, 2000);
   }
 }

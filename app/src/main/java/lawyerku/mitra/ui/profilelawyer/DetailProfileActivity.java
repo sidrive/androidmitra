@@ -248,19 +248,22 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     if(data.get(0).address_2 != null){
       txtMap.setText(data.get(0).address_2);
     }
-    if(data.get(0).jobskills.get(0).id == 1){
-      chkPidana.setChecked(true);
+    if(!data.get(0).jobskills.isEmpty()){
+        if(data.get(0).jobskills.get(0).id == 1){
+            chkPidana.setChecked(true);
+        }
+        if(data.get(0).jobskills.get(0).id == 2){
+            chkPerdata.setChecked(true);
+        }
     }
-    if(data.get(0).jobskills.get(0).id == 2){
-      chkPerdata.setChecked(true);
-    }
-    if(data.get(0).languageskills.get(0).id == 1){
-      chkIndonesia.setChecked(true);
-    }
-    if(data.get(0).languageskills.get(0).id == 2){
-      chkInggris.setChecked(true);
-    }
-
+      if(!data.get(0).languageskills.isEmpty()) {
+          if (data.get(0).languageskills.get(0).id == 1) {
+              chkIndonesia.setChecked(true);
+          }
+          if (data.get(0).languageskills.get(0).id == 2) {
+              chkInggris.setChecked(true);
+          }
+      }
 
   }
 
@@ -490,8 +493,19 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
       lawyer.cellphone1 = txtPhone.getText().toString();
       lawyer.level = dataLawyer.get(0).level;
       lawyer.smartphone = dataLawyer.get(0).smartphone;
-      lawyer.rateMin = dataLawyer.get(0).rateMin;
-      lawyer.rateMax = dataLawyer.get(0).rateMax;
+      if(dataLawyer.get(0).rateMin == null){
+        lawyer.rateMin = "1.00";
+      }
+      if(dataLawyer.get(0).rateMax == null){
+        lawyer.rateMax = "0.00";
+      }
+      if(dataLawyer.get(0).rateMin != null){
+        lawyer.rateMin = dataLawyer.get(0).rateMin;
+      }
+      if(dataLawyer.get(0).rateMax != null){
+        lawyer.rateMax = dataLawyer.get(0).rateMax;
+      }
+
       lawyer.id = dataLawyer.get(0).id;
       lawyer.idnumber = dataLawyer.get(0).idnumber;
       lawyer.jobskill = jobskillnew;

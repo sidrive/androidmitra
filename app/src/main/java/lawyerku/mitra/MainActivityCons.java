@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -19,8 +20,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lawyerku.mitra.api.LawyerkuService;
 import lawyerku.mitra.api.model.PerkaraModel;
 import lawyerku.mitra.mainfragment.HistoryFragment;
 import lawyerku.mitra.mainfragment.HistoryFragment.OnFragmentInteractionListener;
@@ -28,11 +34,19 @@ import lawyerku.mitra.mainfragment.PerkaraNewFragment;
 import lawyerku.mitra.mainfragment.PerkaraOnProgressFragment;
 import lawyerku.mitra.mainfragment.PerkaraRejectedFragment;
 import lawyerku.mitra.mainfragment.ViewPagerAdapter;
+import lawyerku.mitra.preference.GlobalPreference;
+import lawyerku.mitra.preference.PrefKey;
 import lawyerku.mitra.ui.detailperkara.DetailPerkaraActivity;
 import lawyerku.mitra.ui.profilelawyer.DetailProfileActivity;
 import lawyerku.mitra.ui.MessageActivity;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class MainActivityCons extends AppCompatActivity implements PerkaraNewFragment.OnFragmentInteractionListener,
         PerkaraOnProgressFragment.OnFragmentInteractionListener,
@@ -66,7 +80,7 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
     getSupportActionBar().setTitle("Home");
 
     locationTask();
-
+    getProfile();
 
   }
 
@@ -151,5 +165,37 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
 
   public void lawyerId(int lawyer_id) {
     lawyerId = lawyer_id;
+  }
+
+  private void getProfile() {
+    String accessToken = GlobalPreference.read(PrefKey.accessToken, String.class);
+    CompositeSubscription subscription = new CompositeSubscription();
+
+    subscription.add(LawyerkuService.Factory.create().getProfile(accessToken)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(response -> {
+
+              List<PerkaraModel.Response.Data> listPerkara = new ArrayList<>();
+
+              if (response.status >= 200 && response.status < 300) {
+//                for (int position = 0; position < response.data.size(); position++){
+////                  listPerkara.add(response.data.get(position));
+//
+//                }
+
+                lawyerId(response.data.id);
+//                initListPerkara(listPerkara,lsperkara);
+                Log.e(TAG, "searchLawyer: "+response.data );
+              } else {
+//                        createProjectListener.onError(response.message);
+              }
+            }, throwable -> {
+              int errorCode = ((HttpException) throwable).response().code();
+              if (errorCode > 400)
+                Log.e(TAG, "getPerkara: "+throwable );
+//                        createProjectListener.onError(App.getContext().getString(R.string.error_general));
+//                    createProjectListener.hideLoading();
+            }));
   }
 }

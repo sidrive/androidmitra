@@ -21,6 +21,19 @@ public class LawyerModel {
         }
     }
 
+    public static class ResponseCustomer {
+        public int status;
+        public DataCustomer data;
+
+        @Override
+        public String toString() {
+            return "ResponseProfile{" +
+                    "message='" + status + '\'' +
+                    ", status=" + status +
+                    '}';
+        }
+    }
+
     public static class ResponseUpdate {
         public int status;
         public String message;
@@ -169,6 +182,29 @@ public class LawyerModel {
                     ", images=" + images +
                     ", languageskills=" + languageskills +
                     ", jobskills=" + jobskills +
+                    '}';
+        }
+    }
+
+    public static class DataCustomer {
+        public int id;
+        public String name;
+        public String address;
+        @SerializedName("phone_number_1") public String phone1;
+        @SerializedName("phone_number_2") public String phone2;
+        @SerializedName("id_number") public String idnumber;
+//        public DataProfile user;
+//        public List<Images> images;
+
+        @Override
+        public String toString() {
+            return "DataCustomer{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", address='" + address + '\'' +
+                    ", phone1='" + phone1 + '\'' +
+                    ", phone2='" + phone2 + '\'' +
+                    ", idnumber='" + idnumber + '\'' +
                     '}';
         }
     }

@@ -39,6 +39,7 @@ import lawyerku.mitra.preference.PrefKey;
 import lawyerku.mitra.ui.detailperkara.DetailPerkaraActivity;
 import lawyerku.mitra.ui.profilelawyer.DetailProfileActivity;
 import lawyerku.mitra.ui.MessageActivity;
+import lawyerku.mitra.ui.splash.SplashActivity;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.adapter.rxjava.HttpException;
@@ -144,6 +145,8 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
         Intent intent1 = new Intent(MainActivityCons.this, MessageActivity.class);
         startActivity(intent1);
         break;
+      case R.id.action_logout:
+        logout();
     }
     return true;
   }
@@ -197,5 +200,11 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
 //                        createProjectListener.onError(App.getContext().getString(R.string.error_general));
 //                    createProjectListener.hideLoading();
             }));
+  }
+
+  public void logout(){
+    GlobalPreference.clear();
+    Intent intent = new Intent(MainActivityCons.this, SplashActivity.class);
+    startActivity(intent);
   }
 }

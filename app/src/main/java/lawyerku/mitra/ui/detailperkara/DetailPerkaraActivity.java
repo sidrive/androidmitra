@@ -45,7 +45,9 @@ import lawyerku.mitra.R;
 import lawyerku.mitra.api.model.PerkaraModel;
 import lawyerku.mitra.base.BaseActivity;
 import lawyerku.mitra.base.BaseApplication;
+import lawyerku.mitra.preference.GlobalPreference;
 import lawyerku.mitra.ui.MessageActivity;
+import lawyerku.mitra.ui.splash.SplashActivity;
 import lawyerku.mitra.utils.DateFormatter;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -71,8 +73,6 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
     @BindView(R.id.tv_desc)
     TextView txtdescription;
 
-    @BindView(R.id.tv_nama_lawyer)
-    TextView txtnamaLawyer;
 
     @BindView(R.id.tv_telp)
     TextView txttelpLawyer;
@@ -229,13 +229,15 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
         txtNamaCustomer.setText(data.get(0).customer.name);
         txtbidangHukum.setText(data.get(0).jobskill.name);
         txtdescription.setText(data.get(0).description);
-        txtnamaLawyer.setText(data.get(0).lawyer.lawyername);
-        txthpLawyer.setText(data.get(0).lawyer.lawyerPhone2);
-        txttelpLawyer.setText(data.get(0).lawyer.lawyerPhone1);
+//        txtnamaLawyer.setText(data.get(0).lawyer.lawyername);
+        txthpLawyer.setText(data.get(0).customer.customerPhone);
+        txttelpLawyer.setText(data.get(0).customer.customerPhone);
 
         if(data.get(0).last_status.status.equals("new"))
         {
             txtStatus.setText("Status : Baru");
+            txthpLawyer.setVisibility(View.GONE);
+            txttelpLawyer.setVisibility(View.GONE);
         }
         if(data.get(0).last_status.status.equals("on-progress"))
         {
@@ -244,10 +246,14 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
         if(data.get(0).last_status.status.equals("rejected"))
         {
             txtStatus.setText("Status : Ditolak");
+            txthpLawyer.setVisibility(View.GONE);
+            txttelpLawyer.setVisibility(View.GONE);
         }
         if(data.get(0).last_status.status.equals("canceled"))
         {
             txtStatus.setText("Status : Dibatalkan");
+            txthpLawyer.setVisibility(View.GONE);
+            txttelpLawyer.setVisibility(View.GONE);
         }
         if(data.get(0).last_status.status.equals("finished"))
         {
@@ -280,4 +286,7 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
         Intent intent = new Intent(DetailPerkaraActivity.this, MainActivityCons.class);
         startActivity(intent);
     }
+
+
+
 }

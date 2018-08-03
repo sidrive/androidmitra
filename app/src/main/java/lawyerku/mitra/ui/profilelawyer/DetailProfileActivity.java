@@ -240,6 +240,12 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     Log.e("profileLawyer", "showProfile: "+data );
 
     dataLawyer = data;
+    if(data.get(0).first_name != null){
+      txtFirstName.setText(data.get(0).first_name);
+    }
+    if(data.get(0).last_name != null){
+      txtLastName.setText(data.get(0).last_name);
+    }
     txtNama.setText(data.get(0).name);
     txtAddress.setText(data.get(0).address_1);
     txtIdcard.setText(data.get(0).idnumber);
@@ -251,27 +257,43 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     if(!data.get(0).jobskills.isEmpty()){
         if(data.get(0).jobskills.get(0).id == 1){
             chkPidana.setChecked(true);
-
-            if(data.get(0).jobskills.get(1) != null){
-              chkPerdata.setChecked(true);
+            if(data.get(0).jobskills.size() > 1){
+                if(data.get(0).jobskills.get(1) != null){
+                    chkPerdata.setChecked(true);
+                }
             }
+
         }
         if(data.get(0).jobskills.get(0).id == 2){
             chkPerdata.setChecked(true);
+            if(data.get(0).jobskills.size() > 1){
+              if(data.get(0).jobskills.get(1) != null){
+                chkPidana.setChecked(true);
+              }
+            }
 
-          if(data.get(0).jobskills.get(1) != null){
-            chkPerdata.setChecked(true);
-          }
         }
     }
-      if(!data.get(0).languageskills.isEmpty()) {
-          if (data.get(0).languageskills.get(0).id == 1) {
-              chkIndonesia.setChecked(true);
+    if(!data.get(0).languageskills.isEmpty()){
+      if(data.get(0).languageskills.get(0).id == 1){
+        chkIndonesia.setChecked(true);
+        if(data.get(0).languageskills.size() > 1){
+          if(data.get(0).languageskills.get(1) != null){
+            chkInggris.setChecked(true);
           }
-          if (data.get(0).languageskills.get(0).id == 2) {
-              chkInggris.setChecked(true);
-          }
+        }
+
       }
+      if(data.get(0).languageskills.get(0).id == 2){
+        chkInggris.setChecked(true);
+        if(data.get(0).languageskills.size() > 1){
+          if(data.get(0).languageskills.get(1) != null){
+            chkIndonesia.setChecked(true);
+          }
+        }
+
+      }
+    }
 
   }
 

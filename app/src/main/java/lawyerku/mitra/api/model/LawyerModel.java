@@ -3,6 +3,7 @@ package lawyerku.mitra.api.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.security.PublicKey;
+import java.util.Arrays;
 import java.util.List;
 
 public class LawyerModel {
@@ -65,8 +66,8 @@ public class LawyerModel {
         @SerializedName("rate_min") public String rateMin;
         @SerializedName("rate_max") public String rateMax;
         @SerializedName("id_number") public String idnumber;
-        public int languageskill;
-        public int jobskill;
+        public int [] languageskill;
+        public int [] jobskill;
         public String email;
 
         @Override
@@ -87,8 +88,8 @@ public class LawyerModel {
                     ", rateMin='" + rateMin + '\'' +
                     ", rateMax='" + rateMax + '\'' +
                     ", idnumber='" + idnumber + '\'' +
-                    ", languageskill=" + languageskill +
-                    ", jobskill=" + jobskill +
+                    ", languageskill=" + Arrays.toString(languageskill) +
+                    ", jobskill=" + Arrays.toString(jobskill) +
                     ", email='" + email + '\'' +
                     '}';
         }

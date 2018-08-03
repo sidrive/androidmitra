@@ -143,12 +143,9 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
         intent.putExtras(bundle);
         startActivity(intent);
         break;
-      case R.id.action_message:
-        Intent intent1 = new Intent(MainActivityCons.this, MessageActivity.class);
-        startActivity(intent1);
-        break;
       case R.id.action_logout:
         logout();
+        break;
     }
     return true;
   }

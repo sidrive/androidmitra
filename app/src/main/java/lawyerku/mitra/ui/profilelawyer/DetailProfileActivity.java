@@ -106,8 +106,8 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
   public static double longitudenew;
   public static String firstname;
   public static String lastname;
-  public static int jobskillnew;
-  public static int languageskillnew;
+  public static int[] jobskillnew;
+  public static int [] languageskillnew;
 
   public static List<LawyerModel.Data> dataLawyer;
 
@@ -177,7 +177,7 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     win.setAttributes(winParams);
   }
 
-  @OnClick(R.id.img_topup)
+  @OnClick(R.id.ln_redeem)
   public void onImgTopupClicked() {
     LayoutInflater li = LayoutInflater.from(this);
     View promptsView = li.inflate(R.layout.redeem_saldo, null);
@@ -251,9 +251,17 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     if(!data.get(0).jobskills.isEmpty()){
         if(data.get(0).jobskills.get(0).id == 1){
             chkPidana.setChecked(true);
+
+            if(data.get(0).jobskills.get(1) != null){
+              chkPerdata.setChecked(true);
+            }
         }
         if(data.get(0).jobskills.get(0).id == 2){
             chkPerdata.setChecked(true);
+
+          if(data.get(0).jobskills.get(1) != null){
+            chkPerdata.setChecked(true);
+          }
         }
     }
       if(!data.get(0).languageskills.isEmpty()) {
@@ -470,17 +478,23 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
       if(TextUtils.isEmpty(txtLastName.getText().toString())){
         lastname = dataLawyer.get(0).user.username;
       }
-      if(chkIndonesia.isChecked()){
-        languageskillnew = 1;
+      if(chkIndonesia.isChecked() && chkInggris.isChecked()){
+        languageskillnew = new int[]{1, 2};
       }
-      if(chkInggris.isChecked()){
-        languageskillnew = 2;
+      else if(chkIndonesia.isChecked()){
+        languageskillnew = new int[]{1};
       }
-      if(chkPerdata.isChecked()){
-        jobskillnew = 2;
+      else if(chkInggris.isChecked()){
+        languageskillnew = new int[]{2};
       }
-      if(chkPidana.isChecked()){
-        jobskillnew = 1;
+      if(chkPerdata.isChecked() && chkPidana.isChecked()){
+        jobskillnew = new int[]{1,2};
+      }
+      else if(chkPerdata.isChecked()){
+        jobskillnew = new int[]{2};
+      }
+      else if(chkPidana.isChecked()){
+        jobskillnew = new int[]{1};
       }
 
       lawyer.first_name = firstname;
@@ -519,7 +533,7 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
 
   }
 
-  @OnCheckedChanged(R.id.chkIndonesia)
+  /*@OnCheckedChanged(R.id.chkIndonesia)
   public void checkBahasaIndonesia(){
     chkInggris.setChecked(false);
 //    chkIndonesia.setChecked(true);
@@ -538,7 +552,7 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
   public void checkBidangPidana(){
     chkPerdata.setChecked(false);
 //    chkPidana.setChecked(true);
-  }
+  }*/
 
   public void showMain() {
     Toast.makeText(this, "Profile Berhasil Disimpan", Toast.LENGTH_SHORT).show();

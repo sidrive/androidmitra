@@ -55,18 +55,23 @@ public class AdapterPerkara extends RecyclerView.Adapter<AdapterPerkara.ViewHold
         holder.txtLawyer.setText(perkara.lawyer.lawyername);
         holder.txtLevel.setText("Level : "+perkara.lawyer.level);
         holder.txtRating.setText("Rating : "+String.valueOf(perkara.lawyer.rateMax));
+
         holder.txtKeahlian.setText("Keahlian : "+perkara.jobskill.name);
         if(perkara.last_status.status.equals("new")){
             holder.txtStatus.setText("Status Perkara : Perkara Baru");
+            holder.txtRating.setVisibility(View.GONE);
         }
         if(perkara.last_status.status.equals("on-progress")){
             holder.txtStatus.setText("Status Perkara : Sedang Berlangsung");
+            holder.txtRating.setVisibility(View.GONE);
         }
         if(perkara.last_status.status.equals("rejected")){
             holder.txtStatus.setText("Status Perkara : Ditolak");
+            holder.txtRating.setVisibility(View.GONE);
         }
         if(perkara.last_status.status.equals("canceled")){
             holder.txtStatus.setText("Status Perkara : Dibatalkan ");
+            holder.txtRating.setVisibility(View.GONE);
         }
         if(perkara.last_status.status.equals("finished")){
             holder.txtStatus.setText("Status Perkara : Selesai");

@@ -22,6 +22,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,6 +89,15 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
 
     @BindView(R.id.tv_tgl_selesai)
     TextView txtEndDate;
+
+    @BindView(R.id.btn_approve)
+    Button btnApprove;
+
+    @BindView(R.id.btn_reject)
+    Button btnReject;
+
+    @BindView(R.id.rating)
+    RatingBar rating;
 
     private GoogleMap mMap;
     private LocationManager lm;
@@ -238,6 +248,9 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
             txtStatus.setText("Status : Baru");
             txthpLawyer.setVisibility(View.GONE);
             txttelpLawyer.setVisibility(View.GONE);
+            btnApprove.setVisibility(View.VISIBLE);
+            btnReject.setVisibility(View.VISIBLE);
+
         }
         if(data.get(0).last_status.status.equals("on-progress"))
         {
@@ -258,6 +271,7 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
         if(data.get(0).last_status.status.equals("finished"))
         {
             txtStatus.setText("Status : Selesai");
+            rating.setVisibility(View.VISIBLE);
         }
 
         String starDate = DateFormatter.getDate(data.get(0).start_date,"yyyy-MM-dd");

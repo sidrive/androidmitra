@@ -30,7 +30,7 @@
     <string name="prompt_cellphone2">Telepon / HP 2</string>
     <string name="prompt_nik">No.KTP/SIM</string>
     <string name="text_forgot_password">Lupa password?</string>
-    <string name="text_or">or</string>
+    <string name="text_or">ATAU</string>
     <string name="text_please_wait">Tunggu sebentar</string>
     <string name="action_register_customer">Register Customer</string>
     <string name="action_register_workman">Register Mitra Ketukang</string>
@@ -163,7 +163,7 @@
     <string name="str_first_name">First Name</string>
     <string name="str_dftr_pengacara">Daftar sebagai Pengacara</string>
     <string name="str_btn_resetpass">RESET PASSWORD</string>
-    <string name="str_register">CREATE AN ACCOUNT</string>
+    <string name="str_register">BUAT AKUN BARU</string>
 
     <string name="ijin_lokasi">Membutuhkan ijin untuk akses lokasi</string>
     <string name="str_bahasa">Bahasa</string>

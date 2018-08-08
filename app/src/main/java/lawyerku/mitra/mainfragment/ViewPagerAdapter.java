@@ -44,19 +44,19 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
         String title = null;
         if (position == 0)
         {
-            title = "On Progress";
+            title = "Sedang Berjalan";
         }
         else if (position == 1)
         {
-            title = "New Case";
+            title = "Perkara Baru";
         }
         else if (position == 2)
         {
-            title = "Rejected Case";
+            title = "Perkara Ditolak";
         }
         else if (position == 3)
         {
-            title = "History";
+            title = "Riwayat";
         }
 
         return title;

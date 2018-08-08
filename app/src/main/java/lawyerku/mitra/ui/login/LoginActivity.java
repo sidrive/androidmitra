@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -33,6 +34,9 @@ public class LoginActivity extends BaseActivity {
 
   @BindView(R.id.et_password)
   TextView txtPassword;
+
+  @BindView(R.id.view_progress)
+  LinearLayout viewProgress;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,8 @@ public class LoginActivity extends BaseActivity {
   @OnClick(R.id.btn_login)
   public void showLogin(){
 
+    showLoading(true);
+
     CredentialModel.Request credential = new CredentialModel.Request();
     credential.email = txtEmail.getText().toString();
     credential.password = txtPassword.getText().toString();
@@ -105,4 +111,12 @@ public class LoginActivity extends BaseActivity {
         Intent i = new Intent(LoginActivity.this, MainActivityCons.class);
         startActivity(i);
     }
+
+  public void showLoading(boolean show) {
+    if (show) {
+      viewProgress.setVisibility(View.VISIBLE);
+    } else {
+      viewProgress.setVisibility(View.GONE);
+    }
+  }
 }

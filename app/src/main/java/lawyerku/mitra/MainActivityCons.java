@@ -80,7 +80,7 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
     tlLawyer.setupWithViewPager(vpLawyer);
 
     setSupportActionBar(tbMain);
-    getSupportActionBar().setTitle("Home");
+    getSupportActionBar().setTitle("Beranda");
 
     locationTask();
     getProfile();

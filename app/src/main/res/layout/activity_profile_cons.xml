@@ -425,5 +425,5 @@
 
 
   </RelativeLayout>
-
+  <include layout="@layout/view_progress"/>
 </android.support.constraint.ConstraintLayout>

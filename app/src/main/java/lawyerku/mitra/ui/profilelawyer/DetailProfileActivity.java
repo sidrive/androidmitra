@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -93,6 +94,8 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
           CheckBox chkPidana;
   @BindView(R.id.chkPerdata)
           CheckBox chkPerdata;
+  @BindView(R.id.view_progress)
+  LinearLayout viewProgress;
 
 
   CharSequence[] bahasa = {"Indonesia", "Inggris"};
@@ -128,7 +131,7 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     setContentView(R.layout.activity_profile_cons);
     ButterKnife.bind(this);
     transparentStatusBar();
-
+    showLoading(true);
     getCurrentLocationUser();
 
     mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -294,6 +297,8 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
 
       }
     }
+
+    showLoading(false);
 
   }
 
@@ -555,30 +560,18 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
 
   }
 
-  /*@OnCheckedChanged(R.id.chkIndonesia)
-  public void checkBahasaIndonesia(){
-    chkInggris.setChecked(false);
-//    chkIndonesia.setChecked(true);
-  }
-  @OnCheckedChanged(R.id.chkInggris)
-  public void checkBahasaInggris(){
-    chkIndonesia.setChecked(false);
-//    chkInggris.setChecked(true);
-  }
-  @OnCheckedChanged(R.id.chkPerdata)
-  public void checkBidangPerdata(){
-    chkPidana.setChecked(false);
-//    chkPerdata.setChecked(true);
-  }
-  @OnCheckedChanged(R.id.chkPidana)
-  public void checkBidangPidana(){
-    chkPerdata.setChecked(false);
-//    chkPidana.setChecked(true);
-  }*/
 
   public void showMain() {
     Toast.makeText(this, "Profile Berhasil Disimpan", Toast.LENGTH_SHORT).show();
     Intent i = new Intent(DetailProfileActivity.this, MainActivityCons.class);
     startActivity(i);
+  }
+
+  public void showLoading(boolean show) {
+    if (show) {
+      viewProgress.setVisibility(View.VISIBLE);
+    } else {
+      viewProgress.setVisibility(View.GONE);
+    }
   }
 }

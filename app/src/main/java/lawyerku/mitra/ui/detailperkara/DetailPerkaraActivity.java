@@ -3,8 +3,6 @@ package lawyerku.mitra.ui.detailperkara;
 import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -14,9 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -46,9 +42,7 @@ import lawyerku.mitra.R;
 import lawyerku.mitra.api.model.PerkaraModel;
 import lawyerku.mitra.base.BaseActivity;
 import lawyerku.mitra.base.BaseApplication;
-import lawyerku.mitra.preference.GlobalPreference;
-import lawyerku.mitra.ui.MessageActivity;
-import lawyerku.mitra.ui.splash.SplashActivity;
+import lawyerku.mitra.ui.message.MessageActivity;
 import lawyerku.mitra.utils.DateFormatter;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -107,6 +101,8 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
 
     private static final int RC_LOC_PERM = 1001;
     public static int id;
+
+    public static List<PerkaraModel.Response.Data> perkara;
 
 
     @Override
@@ -223,6 +219,11 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
     @OnClick(R.id.img_msg)
     public void onImgMsgClicked() {
         Intent intent = new Intent(DetailPerkaraActivity.this, MessageActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("idcustomer",String.valueOf(perkara.get(0).customer.user_id));
+        bundle.putString("idlawyer",String.valueOf(perkara.get(0).lawyer.user_id));
+        bundle.putString("projectid",String.valueOf(perkara.get(0).id));
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -234,6 +235,7 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
 
     public void initProject(List<PerkaraModel.Response.Data> data) {
         Log.e("DetailPerkara", "initProject: "+data );
+        perkara = data;
         LatLng latLng = new LatLng(data.get(0).gps_latitude,data.get(0).gps_longitud);
         initMap(latLng);
         txtNamaCustomer.setText(data.get(0).customer.name);

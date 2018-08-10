@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import lawyerku.mitra.BuildConfig;
 import lawyerku.mitra.api.model.CredentialModel;
 import lawyerku.mitra.api.model.LawyerModel;
+import lawyerku.mitra.api.model.MessageModel;
 import lawyerku.mitra.api.model.PerkaraModel;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -52,10 +53,11 @@ public interface LawyerkuService {
     Observable<LawyerModel.ResponseCustomer> getProfile(@Header("Authorization") String header);
 
     @Headers("Accept:application/json")
-    @GET("api/lawyers/{id}")
+//    @GET("api/lawyers/{id}")
+    @POST("api/me")
     Observable<LawyerModel.Response> getProfileLawyer
-            (@Header("Authorization") String header,
-            @Path("id") String id);
+            (@Header("Authorization") String header/*,
+            @Path("id") String id*/);
 
     @Headers("Accept:application/json")
     @PUT("api/lawyers/update")
@@ -94,6 +96,22 @@ public interface LawyerkuService {
     Observable<PerkaraModel.ResponseSetStatus> approveProject(
             @Header("Authorization") String header,
             @Body PerkaraModel.Status body );
+
+    //    ==============================================================
+    //                      MESSAGE
+    //    ==============================================================
+
+    @Headers("Accept:application/json")
+    @GET("api/message/{id}")
+    Observable<MessageModel.Response> getMessage
+            (@Header("Authorization") String header,
+             @Path("id") int id);
+
+    @Headers("Accept:application/json")
+    @POST("api/message")
+    Observable<MessageModel.Response> sendMessage
+            (@Header("Authorization") String header,
+             @Body MessageModel.MessageToSend body);
 
 
     //    ==============================================================

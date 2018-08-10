@@ -1,9 +1,13 @@
-package lawyerku.mitra.ui.profilelawyer;
+package lawyerku.mitra.ui.message;
 
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lawyerku.mitra.api.LawyerkuService;
-import lawyerku.mitra.api.model.LawyerModel;
+import lawyerku.mitra.api.model.MessageModel;
 import lawyerku.mitra.base.BasePresenter;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
@@ -12,16 +16,14 @@ import rx.subscriptions.CompositeSubscription;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class DetailProfilePresenter implements BasePresenter {
-    DetailProfileActivity activity;
+public class MessagePresenter implements BasePresenter {
+    MessageActivity activity;
     CompositeSubscription subscription;
 
-    public DetailProfilePresenter(DetailProfileActivity activity){
+    public MessagePresenter(MessageActivity activity){
         this.activity = activity;
         this.subscription = new CompositeSubscription();
     }
-
-
     @Override
     public void subscribe() {
 
@@ -32,16 +34,20 @@ public class DetailProfilePresenter implements BasePresenter {
 
     }
 
-    public void getProfile(String accessToken,int id) {
-        Log.e(TAG, "getProfile: "+id );
-        subscription.add(LawyerkuService.Factory.create().getProfileLawyer(accessToken/*,String.valueOf(id)*/)
+    public void getMessage(String accessToken, RecyclerView rvMessage, int id) {
+
+        subscription.add(LawyerkuService.Factory.create().getMessage(accessToken,id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    Log.e("detailprofile", "getAccount: "+response );
-                    if (response.status >= 200 && response.status < 300) {
+                    Log.e(TAG, "getMessage: "+response );
+                    List<MessageModel.Data> listMessage = new ArrayList<>();
 
-                        activity.showProfile(response.data);
+                    if (response.status >= 200 && response.status < 300) {
+                        for (int position = 0; position < response.data.size(); position++){
+                            listMessage.add(response.data.get(position));
+                        }
+                        activity.initListMessage(listMessage,rvMessage);
 
                     } else {
 //                        profileListener.onError(response.message);
@@ -54,15 +60,15 @@ public class DetailProfilePresenter implements BasePresenter {
                 }));
     }
 
-    public void update(LawyerModel.DataUpdate lawyer, String accessToken) {
-        subscription.add(LawyerkuService.Factory.create().updateLawyer(accessToken,lawyer)
+    public void send(String accessToken, MessageModel.MessageToSend pesan) {
+        subscription.add(LawyerkuService.Factory.create().sendMessage(accessToken,pesan)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    Log.e("updateprofile", "getAccount: "+response );
+                    Log.e(TAG, "getMessage: "+response );
                     if (response.status >= 200 && response.status < 300) {
 
-                        activity.showMain();
+                        getMessage(accessToken,activity.rvMessage,activity.idproject);
 
                     } else {
 //                        profileListener.onError(response.message);

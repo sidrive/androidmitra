@@ -112,7 +112,7 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
   public static int[] jobskillnew;
   public static int [] languageskillnew;
 
-  public static List<LawyerModel.Data> dataLawyer;
+  public static LawyerModel.DataProfile dataLawyer;
 
   private LocationManager lm;
   private android.location.Location mlocation;
@@ -239,58 +239,58 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     presenter.getProfile(accessToken,id);
   }
 
-  public void showProfile(List<LawyerModel.Data> data) {
+  public void showProfile(LawyerModel.DataProfile data) {
     Log.e("profileLawyer", "showProfile: "+data );
 
     dataLawyer = data;
-    if(data.get(0).first_name != null){
-      txtFirstName.setText(data.get(0).first_name);
+    if(data.first_name != null){
+      txtFirstName.setText(data.first_name);
     }
-    if(data.get(0).last_name != null){
-      txtLastName.setText(data.get(0).last_name);
+    if(data.last_name != null){
+      txtLastName.setText(data.last_name);
     }
-    txtNama.setText(data.get(0).name);
-    txtAddress.setText(data.get(0).address_1);
-    txtIdcard.setText(data.get(0).idnumber);
-    txtPhone.setText(data.get(0).cellphone1);
-    txtEmail.setText(data.get(0).user.email);
-    if(data.get(0).address_2 != null){
-      txtMap.setText(data.get(0).address_2);
+    txtNama.setText(data.name);
+    txtAddress.setText(data.address_1);
+    txtIdcard.setText(data.idnumber);
+    txtPhone.setText(data.cellphone1);
+    txtEmail.setText(data.email);
+    if(data.address_2 != null){
+      txtMap.setText(data.address_2);
     }
-    if(!data.get(0).jobskills.isEmpty()){
-        if(data.get(0).jobskills.get(0).id == 1){
+    if(!data.jobskills.isEmpty()){
+        if(data.jobskills.get(0).id == 1){
             chkPidana.setChecked(true);
-            if(data.get(0).jobskills.size() > 1){
-                if(data.get(0).jobskills.get(1) != null){
+            if(data.jobskills.size() > 1){
+                if(data.jobskills.get(1) != null){
                     chkPerdata.setChecked(true);
                 }
             }
 
         }
-        if(data.get(0).jobskills.get(0).id == 2){
+        if(data.jobskills.get(0).id == 2){
             chkPerdata.setChecked(true);
-            if(data.get(0).jobskills.size() > 1){
-              if(data.get(0).jobskills.get(1) != null){
+            if(data.jobskills.size() > 1){
+              if(data.jobskills.get(1) != null){
                 chkPidana.setChecked(true);
               }
             }
 
         }
     }
-    if(!data.get(0).languageskills.isEmpty()){
-      if(data.get(0).languageskills.get(0).id == 1){
+    if(!data.languageskills.isEmpty()){
+      if(data.languageskills.get(0).id == 1){
         chkIndonesia.setChecked(true);
-        if(data.get(0).languageskills.size() > 1){
-          if(data.get(0).languageskills.get(1) != null){
+        if(data.languageskills.size() > 1){
+          if(data.languageskills.get(1) != null){
             chkInggris.setChecked(true);
           }
         }
 
       }
-      if(data.get(0).languageskills.get(0).id == 2){
+      if(data.languageskills.get(0).id == 2){
         chkInggris.setChecked(true);
-        if(data.get(0).languageskills.size() > 1){
-          if(data.get(0).languageskills.get(1) != null){
+        if(data.languageskills.size() > 1){
+          if(data.languageskills.get(1) != null){
             chkIndonesia.setChecked(true);
           }
         }
@@ -500,10 +500,10 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
          lastname = txtLastName.getText().toString();
       }
       if(TextUtils.isEmpty(txtFirstName.getText().toString())){
-        firstname = dataLawyer.get(0).name;
+        firstname = dataLawyer.name;
       }
       if(TextUtils.isEmpty(txtLastName.getText().toString())){
-        lastname = dataLawyer.get(0).user.username;
+        lastname = dataLawyer.user.username;
       }
       if(chkIndonesia.isChecked() && chkInggris.isChecked()){
         languageskillnew = new int[]{1, 2};
@@ -532,23 +532,23 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
       lawyer.latitude = String.valueOf(latitudenew);
       lawyer.longitude = String.valueOf(longitudenew);
       lawyer.cellphone1 = txtPhone.getText().toString();
-      lawyer.level = dataLawyer.get(0).level;
-      lawyer.smartphone = dataLawyer.get(0).smartphone;
-      if(dataLawyer.get(0).rateMin == null){
+      lawyer.level = dataLawyer.level;
+      lawyer.smartphone = dataLawyer.smartphone;
+      if(dataLawyer.rateMin == null){
         lawyer.rateMin = "1.00";
       }
-      if(dataLawyer.get(0).rateMax == null){
+      if(dataLawyer.rateMax == null){
         lawyer.rateMax = "0.00";
       }
-      if(dataLawyer.get(0).rateMin != null){
-        lawyer.rateMin = dataLawyer.get(0).rateMin;
+      if(dataLawyer.rateMin != null){
+        lawyer.rateMin = dataLawyer.rateMin;
       }
-      if(dataLawyer.get(0).rateMax != null){
-        lawyer.rateMax = dataLawyer.get(0).rateMax;
+      if(dataLawyer.rateMax != null){
+        lawyer.rateMax = dataLawyer.rateMax;
       }
 
-      lawyer.id = dataLawyer.get(0).id;
-      lawyer.idnumber = dataLawyer.get(0).idnumber;
+      lawyer.id = dataLawyer.id;
+      lawyer.idnumber = dataLawyer.idnumber;
       lawyer.jobskill = jobskillnew;
       lawyer.languageskill = languageskillnew;
 

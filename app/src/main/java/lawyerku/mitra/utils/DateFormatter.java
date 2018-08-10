@@ -18,7 +18,7 @@ public class DateFormatter {
             e.printStackTrace();
         }
         // Create a calendar object that will convert the date and time value in milliseconds to date.
-        SimpleDateFormat formatdate = new SimpleDateFormat("dd MMMM yyyy");
+        SimpleDateFormat formatdate = new SimpleDateFormat(dateFormat);
         return formatdate.format(date);
     }
 }

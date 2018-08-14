@@ -6,7 +6,7 @@ android {
         applicationId "lawyerku.android_mitra"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 1
+        versionCode 2
         versionName "1.0"
         buildConfigField 'String', 'LawyerkuUrl', '"http://lawyerku.dev.komuri.co.id/"'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -45,6 +45,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     implementation 'pub.devrel:easypermissions:1.0.1'
     implementation 'com.github.ybq:Android-SpinKit:1.1.0'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.16'
     testImplementation 'junit:junit:4.12'

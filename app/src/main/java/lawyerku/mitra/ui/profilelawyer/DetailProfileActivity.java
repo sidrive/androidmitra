@@ -14,6 +14,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Build.VERSION;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -313,13 +314,15 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0, locationListener);
         mlocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         Log.e(TAG, "getCurrentLocationUser: "+mlocation );
+
       } else if (isGPSEnabled) {
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
         mlocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         Log.e(TAG, "getCurrentLocationUser: "+mlocation );
       }
+
     }
-    Log.e(TAG, "getCurrentLocationUser: "+mlocation );
+    Log.e(TAG, "getCurrentLocationUser: "+Manifest.permission.ACCESS_FINE_LOCATION );
   }
 
   private android.location.LocationListener locationListener = new android.location.LocationListener() {
@@ -350,23 +353,26 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
 
     mMap = googleMap;
 
-//        LatLng indonesia = new LatLng(-7.803249, 110.3398253);
-    LatLng indonesia = new LatLng(mlocation.getLatitude(),mlocation.getLongitude());
-    Log.e(TAG, "initMap: "+indonesia );
-//    initMap(indonesia);
-    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(indonesia, 16));
-    mMap.setOnCameraIdleListener(this);
-    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
-      return;
-    }
-    mMap.setMyLocationEnabled(true);
+    getCurrentLocationUser();
 
+      LatLng indonesia = new LatLng(mlocation.getLatitude(), mlocation.getLongitude());
+      Log.e(TAG, "initMap: " + indonesia);
+//    initMap(indonesia);
+      mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(indonesia, 16));
+      mMap.setOnCameraIdleListener(this);
+      if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+              != PackageManager.PERMISSION_GRANTED
+              && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+              != PackageManager.PERMISSION_GRANTED) {
+        return;
+      }
+      mMap.setMyLocationEnabled(true);
+//    }
 //    mMap.addMarker(new MarkerOptions()
 //            .position(mMap.getCameraPosition().target)
 //            .title("Marker"));
+
+
   }
 
 //

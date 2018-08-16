@@ -92,6 +92,7 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
     ButterKnife.bind(this);
 
     transparentStatusBar();
+    getCurrentLocationUser();
     displayLocationSettingsRequest(this);
 
     viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -112,7 +113,7 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
     if (EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
       // Have permission, do the thing!
 //            onLaunchCamera();
-      Toast.makeText(this, "Access Granted", Toast.LENGTH_SHORT).show();
+
     } else {
       // Ask for one permission
       EasyPermissions.requestPermissions(this, getString(R.string.ijin_lokasi),

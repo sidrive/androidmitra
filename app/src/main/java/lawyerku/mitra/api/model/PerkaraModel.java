@@ -37,6 +37,7 @@ public class PerkaraModel {
             public Lawyer lawyer;
             public Jobskill jobskill;
             public Status last_status;
+            public Rating rating;
 
             @Override
             public String toString() {
@@ -161,5 +162,12 @@ public class PerkaraModel {
                     ", status='" + status + '\'' +
                     '}';
         }
+    }
+
+    public static class Rating {
+        public int id;
+        public int project_id;
+        public String comment;
+        public float rating;
     }
 }

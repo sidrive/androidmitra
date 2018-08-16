@@ -91,7 +91,7 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
     Button btnReject;
 
     @BindView(R.id.rating)
-    RatingBar rating;
+    RatingBar ratingBar;
 
     private GoogleMap mMap;
     private LocationManager lm;
@@ -244,7 +244,12 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
 //        txtnamaLawyer.setText(data.get(0).lawyer.lawyername);
         txthpLawyer.setText(data.get(0).customer.customerPhone);
         txttelpLawyer.setText(data.get(0).customer.customerPhone);
-
+        if(data.get(0).rating != null){
+            ratingBar.setRating(data.get(0).rating.rating);
+        }
+        if(data.get(0).rating == null){
+            ratingBar.setVisibility(View.GONE);
+        }
         if(data.get(0).last_status.status.equals("new"))
         {
             txtStatus.setText("Status : Baru");
@@ -273,7 +278,7 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
         if(data.get(0).last_status.status.equals("finished"))
         {
             txtStatus.setText("Status : Selesai");
-            rating.setVisibility(View.VISIBLE);
+            ratingBar.setVisibility(View.VISIBLE);
         }
 
         String starDate = DateFormatter.getDate(data.get(0).start_date,"yyyy-MM-dd");

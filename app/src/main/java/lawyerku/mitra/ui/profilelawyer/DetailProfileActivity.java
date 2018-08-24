@@ -119,6 +119,7 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
   private android.location.Location mlocation;
   private GoogleMap mMap;
   public static GoogleMap nmap;
+  public static LatLng indonesia;
 
   private boolean mapMode = false;
 
@@ -357,7 +358,13 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
 
     getCurrentLocationUser();
     Log.e(TAG, "onMapReady: "+mlocation );
-    LatLng indonesia = new LatLng(-7.803249, 110.3398253);
+    if(mlocation == null){
+        indonesia = new LatLng(-6.1701812, 106.8219857);
+    }
+    if(mlocation != null){
+        indonesia = new LatLng(mlocation.getLatitude(), mlocation.getLongitude());
+    }
+
 //      LatLng indonesia = new LatLng(mlocation.getLatitude(), mlocation.getLongitude());
       Log.e(TAG, "initMap: " + indonesia);
 //    initMap(indonesia);
@@ -398,6 +405,7 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     mapMode = true;
 //    menuDone.setVisible(false);
     showLocationCurrent();
+//    timerShow();
   }
 
   @OnClick(R.id.btnSimpanMap)
@@ -585,20 +593,23 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     }
   }
 
+
+
   public void showLocationCurrent(){
+
     if(mlocation != null){
       LatLng indonesia = new LatLng(mlocation.getLatitude(), mlocation.getLongitude());
       Log.e(TAG, "initMap: " + indonesia);
 //    initMap(indonesia);
-      mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(indonesia, 16));
-      mMap.setOnCameraIdleListener(this);
+      nmap.moveCamera(CameraUpdateFactory.newLatLngZoom(indonesia, 16));
+      nmap.setOnCameraIdleListener(this);
       if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
               != PackageManager.PERMISSION_GRANTED
               && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
               != PackageManager.PERMISSION_GRANTED) {
         return;
       }
-      mMap.setMyLocationEnabled(true);
+      nmap.setMyLocationEnabled(true);
     }
 
   }

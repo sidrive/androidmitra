@@ -53,8 +53,8 @@ public class DetailPerkaraPresenter implements BasePresenter {
                     }
 //                    profileListener.hideLoading();
                 }, throwable -> {
-                    int errorCode = ((HttpException) throwable).response().code();
-                    Log.e(TAG, "getProject: "+throwable );
+//                    int errorCode = ((HttpException) throwable).response().code();
+//                    Log.e(TAG, "getProject: "+throwable );
 //                    if (errorCode > 400)
 //                        profileListener.onError(App.getContext().getString(R.string.error_general));
 //                    profileListener.hideLoading();

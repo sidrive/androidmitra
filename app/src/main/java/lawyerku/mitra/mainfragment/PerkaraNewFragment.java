@@ -172,9 +172,9 @@ public class PerkaraNewFragment extends Fragment {
 //                        createProjectListener.onError(response.message);
                     }
                 }, throwable -> {
-                    int errorCode = ((HttpException) throwable).response().code();
-                    if (errorCode > 400)
-                        Log.e(TAG, "getPerkara: "+throwable );
+//                    int errorCode = ((HttpException) throwable).response().code();
+//                    if (errorCode > 400)
+//                        Log.e(TAG, "getPerkara: "+throwable );
 //                        createProjectListener.onError(App.getContext().getString(R.string.error_general));
 //                    createProjectListener.hideLoading();
                 }));

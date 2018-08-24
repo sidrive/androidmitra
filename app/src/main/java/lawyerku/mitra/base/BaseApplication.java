@@ -6,6 +6,8 @@ import android.location.Geocoder;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import lawyerku.mitra.base.config.DefaultConfig;
 
 public class BaseApplication extends MultiDexApplication {
@@ -32,6 +34,7 @@ public class BaseApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         initAppComponent();
         contextto = getApplicationContext();
     }

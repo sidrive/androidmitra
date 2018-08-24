@@ -3,6 +3,7 @@ package lawyerku.mitra.ui.detailperkara;
 import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -12,11 +13,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -100,7 +104,7 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
     private double longitude = 0;
 
     private static final int RC_LOC_PERM = 1001;
-    public static int id;
+    public static int idproject;
 
     public static List<PerkaraModel.Response.Data> perkara;
 
@@ -113,11 +117,11 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
 
         Bundle bundle = getIntent().getExtras();
         Log.e("detailperkara", "onCreate: "+bundle );
-        id = Integer.parseInt(bundle.getString("id"));
+        idproject = Integer.parseInt(bundle.getString("id"));
         locationTask();
         transparentStatusBar();
 
-        presenter.getProject(id);
+        presenter.getProject(idproject);
     }
 
     @AfterPermissionGranted(RC_LOC_PERM)
@@ -290,12 +294,50 @@ public class DetailPerkaraActivity extends BaseActivity implements OnCameraIdleL
 
     @OnClick(R.id.btn_approve)
     public void approvePerkara(){
-        presenter.approveProject(id,true);
+
+        // get prompts.xml view
+        LayoutInflater li = LayoutInflater.from(this);
+        View promptsView = li.inflate(R.layout.input_salary, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userInput = (EditText) promptsView
+                .findViewById(R.id.txtSalary);
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Update",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+
+                                int salary = Integer.valueOf(userInput.getText().toString());
+
+                                presenter.approveProject(idproject,salary,true);
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
+//        presenter.approveProject(id,true);
     }
 
     @OnClick(R.id.btn_reject)
     public void rejectPerkara(){
-        presenter.approveProject(id,false);
+        presenter.approveProject(idproject,0,false);
     }
 
     public void gotoMain(boolean approve) {

@@ -154,12 +154,14 @@ public class PerkaraModel {
     public static class Status {
         public int id;
         public String status;
+        public int price;
 
         @Override
         public String toString() {
             return "Status{" +
                     "id=" + id +
                     ", status='" + status + '\'' +
+                    ", salary=" + price+
                     '}';
         }
     }

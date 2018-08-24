@@ -61,8 +61,9 @@ public class DetailPerkaraPresenter implements BasePresenter {
                 }));
     }
 
-    public void approveProject(int id,boolean approve) {
+    public void approveProject(int id,int salary,boolean approve) {
         perkara.id = id;
+        perkara.price = salary;
         if(approve){
             perkara.status = "on-progress";
         }else {

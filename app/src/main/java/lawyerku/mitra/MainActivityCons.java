@@ -174,7 +174,7 @@ public class MainActivityCons extends AppCompatActivity implements PerkaraNewFra
                 mlocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                 Log.e(TAG, "getCurrentLocationUser: " + mlocation);
 
-            } else if (isGPSEnabled) {
+            } if (isGPSEnabled) {
                 lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
                 mlocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 Log.e(TAG, "getCurrentLocationUser: " + mlocation);

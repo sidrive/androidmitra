@@ -59,7 +59,10 @@
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="@string/google_maps_key"/>
-  </application>
+      <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b24153ceb0d687cb1e3c445ec32fd65fb924b591" />
+    </application>
 
 
 </manifest>

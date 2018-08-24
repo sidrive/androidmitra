@@ -118,6 +118,7 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
   private LocationManager lm;
   private android.location.Location mlocation;
   private GoogleMap mMap;
+  public static GoogleMap nmap;
 
   private boolean mapMode = false;
 
@@ -313,12 +314,12 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
       if (isNetworkEnabled) {
         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0, locationListener);
         mlocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        Log.e(TAG, "getCurrentLocationUser: "+mlocation );
+        Log.e(TAG, "getCurrentLocationUsernetwork: "+mlocation );
 
-      } else if (isGPSEnabled) {
+      } if (isGPSEnabled) {
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
         mlocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        Log.e(TAG, "getCurrentLocationUser: "+mlocation );
+        Log.e(TAG, "getCurrentLocationUsergps: "+mlocation );
       }
 
     }
@@ -352,10 +353,12 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
   public void onMapReady(GoogleMap googleMap) {
 
     mMap = googleMap;
+    nmap = googleMap;
 
     getCurrentLocationUser();
-
-      LatLng indonesia = new LatLng(mlocation.getLatitude(), mlocation.getLongitude());
+    Log.e(TAG, "onMapReady: "+mlocation );
+    LatLng indonesia = new LatLng(-7.803249, 110.3398253);
+//      LatLng indonesia = new LatLng(mlocation.getLatitude(), mlocation.getLongitude());
       Log.e(TAG, "initMap: " + indonesia);
 //    initMap(indonesia);
       mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(indonesia, 16));
@@ -394,6 +397,7 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     relMap.setVisibility(View.VISIBLE);
     mapMode = true;
 //    menuDone.setVisible(false);
+    showLocationCurrent();
   }
 
   @OnClick(R.id.btnSimpanMap)
@@ -579,5 +583,23 @@ public class DetailProfileActivity extends BaseActivity implements OnMapReadyCal
     } else {
       viewProgress.setVisibility(View.GONE);
     }
+  }
+
+  public void showLocationCurrent(){
+    if(mlocation != null){
+      LatLng indonesia = new LatLng(mlocation.getLatitude(), mlocation.getLongitude());
+      Log.e(TAG, "initMap: " + indonesia);
+//    initMap(indonesia);
+      mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(indonesia, 16));
+      mMap.setOnCameraIdleListener(this);
+      if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+              != PackageManager.PERMISSION_GRANTED
+              && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+              != PackageManager.PERMISSION_GRANTED) {
+        return;
+      }
+      mMap.setMyLocationEnabled(true);
+    }
+
   }
 }
